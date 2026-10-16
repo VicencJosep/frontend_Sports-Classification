@@ -1,0 +1,496 @@
+{
+  "source_video": "hull-sheffield-wednesday-2019-10-01/parts/full/video.mp4",
+  "events": [
+    {
+      "label": "shot",
+      "start_s": 0,
+      "end_s": 3,
+      "peak_confidence": 0.3330561243859309,
+      "mean_confidence": 0.3330561243859309,
+      "n_windows": 1
+    },
+    {
+      "label": "goal",
+      "start_s": 0,
+      "end_s": 6,
+      "peak_confidence": 0.9128647174585779,
+      "mean_confidence": 0.9128647174585779,
+      "n_windows": 1
+    },
+    {
+      "label": "substitution",
+      "start_s": 3,
+      "end_s": 9,
+      "peak_confidence": 0.3468496514268785,
+      "mean_confidence": 0.3468496514268785,
+      "n_windows": 1
+    },
+    {
+      "label": "substitution",
+      "start_s": 12,
+      "end_s": 18,
+      "peak_confidence": 0.22397776371146,
+      "mean_confidence": 0.22397776371146,
+      "n_windows": 1
+    },
+    {
+      "label": "throw-in",
+      "start_s": 15,
+      "end_s": 24,
+      "peak_confidence": 0.5901639180087571,
+      "mean_confidence": 0.4184908641575471,
+      "n_windows": 2
+    },
+    {
+      "label": "foul",
+      "start_s": 21,
+      "end_s": 27,
+      "peak_confidence": 0.25841554175273157,
+      "mean_confidence": 0.25841554175273157,
+      "n_windows": 1
+    },
+    {
+      "label": "corner",
+      "start_s": 24,
+      "end_s": 30,
+      "peak_confidence": 0.2710876743185344,
+      "mean_confidence": 0.2710876743185344,
+      "n_windows": 1
+    },
+    {
+      "label": "card",
+      "start_s": 33,
+      "end_s": 39,
+      "peak_confidence": 0.37488709807592535,
+      "mean_confidence": 0.37488709807592535,
+      "n_windows": 1
+    },
+    {
+      "label": "substitution",
+      "start_s": 36,
+      "end_s": 42,
+      "peak_confidence": 0.4323919548944161,
+      "mean_confidence": 0.4323919548944161,
+      "n_windows": 1
+    },
+    {
+      "label": "substitution",
+      "start_s": 42,
+      "end_s": 48,
+      "peak_confidence": 0.20097258854220743,
+      "mean_confidence": 0.20097258854220743,
+      "n_windows": 1
+    },
+    {
+      "label": "kick-off",
+      "start_s": 45,
+      "end_s": 57,
+      "peak_confidence": 0.38445387670828446,
+      "mean_confidence": 0.3587732089724436,
+      "n_windows": 3
+    },
+    {
+      "label": "substitution",
+      "start_s": 60,
+      "end_s": 66,
+      "peak_confidence": 0.29044229638383573,
+      "mean_confidence": 0.29044229638383573,
+      "n_windows": 1
+    },
+    {
+      "label": "throw-in",
+      "start_s": 63,
+      "end_s": 69,
+      "peak_confidence": 0.6069205749718372,
+      "mean_confidence": 0.6069205749718372,
+      "n_windows": 1
+    },
+    {
+      "label": "foul",
+      "start_s": 66,
+      "end_s": 75,
+      "peak_confidence": 0.6211221115495624,
+      "mean_confidence": 0.536135388645625,
+      "n_windows": 2
+    }
+  ],
+  "ball_actions": [
+    {
+      "frame_idx": 58,
+      "tracker_id": 9179,
+      "label": "drive",
+      "confidence": 0.5602103471755981,
+      "probabilities": {
+        "pass": 0.004505986347794533,
+        "drive": 0.5602103471755981,
+        "high_pass": 0.00003780741462833248,
+        "header": 0.0041953991167247295,
+        "throw_in": 0.000014811119399382733,
+        "background": 0.4310356676578522
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 102,
+      "tracker_id": 9182,
+      "label": "header",
+      "confidence": 0.9476222395896912,
+      "probabilities": {
+        "pass": 0.023521561175584793,
+        "drive": 0.003143763868138194,
+        "high_pass": 0.00001797493314370513,
+        "header": 0.9476222395896912,
+        "throw_in": 0.00004620993786375038,
+        "background": 0.02564823068678379
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 310,
+      "tracker_id": 9196,
+      "label": "background",
+      "confidence": 0.9473873376846313,
+      "probabilities": {
+        "pass": 0.007728309370577335,
+        "drive": 0.0015162923373281956,
+        "high_pass": 1.6595740248703805e-7,
+        "header": 0.04311363399028778,
+        "throw_in": 0.00025432754773646593,
+        "background": 0.9473873376846313
+      },
+      "is_background": true
+    },
+    {
+      "frame_idx": 489,
+      "tracker_id": 9201,
+      "label": "drive",
+      "confidence": 0.8709085583686829,
+      "probabilities": {
+        "pass": 0.021103421226143837,
+        "drive": 0.8709085583686829,
+        "high_pass": 8.73277485879953e-8,
+        "header": 0.015823030844330788,
+        "throw_in": 0.007189200259745121,
+        "background": 0.08497560024261475
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 514,
+      "tracker_id": 9223,
+      "label": "drive",
+      "confidence": 0.9648036360740662,
+      "probabilities": {
+        "pass": 0.0351715013384819,
+        "drive": 0.9648036360740662,
+        "high_pass": 0.0000018353996438236209,
+        "header": 0.000014756003110960592,
+        "throw_in": 0.0000034096733543265145,
+        "background": 0.000004782675659953384
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 517,
+      "tracker_id": 9224,
+      "label": "pass",
+      "confidence": 0.5713822245597839,
+      "probabilities": {
+        "pass": 0.5713822245597839,
+        "drive": 0.42633742094039917,
+        "high_pass": 0.000022467251255875453,
+        "header": 0.00012934226833749563,
+        "throw_in": 0.0006431459332816303,
+        "background": 0.001485387678258121
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 547,
+      "tracker_id": 9223,
+      "label": "pass",
+      "confidence": 0.5961738228797913,
+      "probabilities": {
+        "pass": 0.5961738228797913,
+        "drive": 0.06552848219871521,
+        "high_pass": 0.0008456590585410595,
+        "header": 0.0006596037419512868,
+        "throw_in": 0.000018031230865744874,
+        "background": 0.33677440881729126
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 553,
+      "tracker_id": 9224,
+      "label": "header",
+      "confidence": 0.7108789682388306,
+      "probabilities": {
+        "pass": 0.13258694112300873,
+        "drive": 0.011096219532191753,
+        "high_pass": 0.12243151664733887,
+        "header": 0.7108789682388306,
+        "throw_in": 0.0004471908032428473,
+        "background": 0.022559143602848053
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 561,
+      "tracker_id": 9200,
+      "label": "high_pass",
+      "confidence": 0.4628092348575592,
+      "probabilities": {
+        "pass": 0.167397603392601,
+        "drive": 0.004272061865776777,
+        "high_pass": 0.4628092348575592,
+        "header": 0.005247412249445915,
+        "throw_in": 0.0014639418805018067,
+        "background": 0.35880976915359497
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 667,
+      "tracker_id": 9244,
+      "label": "drive",
+      "confidence": 0.5461598038673401,
+      "probabilities": {
+        "pass": 0.11964908987283707,
+        "drive": 0.5461598038673401,
+        "high_pass": 0.019948545843362808,
+        "header": 0.20651431381702423,
+        "throw_in": 0.0067921532317996025,
+        "background": 0.10093611478805542
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 682,
+      "tracker_id": 9241,
+      "label": "background",
+      "confidence": 0.9928394556045532,
+      "probabilities": {
+        "pass": 0.0027591038960963488,
+        "drive": 0.004205398261547089,
+        "high_pass": 0.000017983167708734982,
+        "header": 0.0001778948790160939,
+        "throw_in": 1.7586785361345392e-7,
+        "background": 0.9928394556045532
+      },
+      "is_background": true
+    },
+    {
+      "frame_idx": 684,
+      "tracker_id": 9239,
+      "label": "background",
+      "confidence": 0.5252519249916077,
+      "probabilities": {
+        "pass": 0.276612788438797,
+        "drive": 0.19029726088047028,
+        "high_pass": 0.004606080241501331,
+        "header": 0.0030053092632442713,
+        "throw_in": 0.00022667476150672883,
+        "background": 0.5252519249916077
+      },
+      "is_background": true
+    },
+    {
+      "frame_idx": 778,
+      "tracker_id": 9253,
+      "label": "pass",
+      "confidence": 0.5005338788032532,
+      "probabilities": {
+        "pass": 0.5005338788032532,
+        "drive": 0.09134551882743835,
+        "high_pass": 0.0000015845383813939407,
+        "header": 0.027069946750998497,
+        "throw_in": 0.000029025086405454203,
+        "background": 0.38102006912231445
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 817,
+      "tracker_id": 9258,
+      "label": "background",
+      "confidence": 0.9970406889915466,
+      "probabilities": {
+        "pass": 0.0009399927221238613,
+        "drive": 0.00038410461274906993,
+        "high_pass": 0.00023510016035288572,
+        "header": 0.00007566747808596119,
+        "throw_in": 0.0013243340654298663,
+        "background": 0.9970406889915466
+      },
+      "is_background": true
+    },
+    {
+      "frame_idx": 1649,
+      "tracker_id": 9312,
+      "label": "drive",
+      "confidence": 0.9389028549194336,
+      "probabilities": {
+        "pass": 0.037181731313467026,
+        "drive": 0.9389028549194336,
+        "high_pass": 0.0007807802758179605,
+        "header": 0.01227472722530365,
+        "throw_in": 0.007468358147889376,
+        "background": 0.0033916067332029343
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 1683,
+      "tracker_id": 9315,
+      "label": "header",
+      "confidence": 0.4946827292442322,
+      "probabilities": {
+        "pass": 0.09232676774263382,
+        "drive": 0.07772979140281677,
+        "high_pass": 0.007921069860458374,
+        "header": 0.4946827292442322,
+        "throw_in": 0.06658688187599182,
+        "background": 0.26075273752212524
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 1778,
+      "tracker_id": 9339,
+      "label": "header",
+      "confidence": 0.5237522125244141,
+      "probabilities": {
+        "pass": 0.10503791272640228,
+        "drive": 0.1082291230559349,
+        "high_pass": 0.0029823167715221643,
+        "header": 0.5237522125244141,
+        "throw_in": 0.04649234563112259,
+        "background": 0.21350614726543427
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 1785,
+      "tracker_id": 9344,
+      "label": "pass",
+      "confidence": 0.4955468475818634,
+      "probabilities": {
+        "pass": 0.4955468475818634,
+        "drive": 0.3781166076660156,
+        "high_pass": 0.01869789883494377,
+        "header": 0.05562456324696541,
+        "throw_in": 0.006115152034908533,
+        "background": 0.04589897394180298
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 1793,
+      "tracker_id": 9339,
+      "label": "background",
+      "confidence": 0.4119653105735779,
+      "probabilities": {
+        "pass": 0.268746018409729,
+        "drive": 0.26691102981567383,
+        "high_pass": 0.00013536319602280855,
+        "header": 0.041959989815950394,
+        "throw_in": 0.010282306000590324,
+        "background": 0.4119653105735779
+      },
+      "is_background": true
+    },
+    {
+      "frame_idx": 1798,
+      "tracker_id": 9344,
+      "label": "pass",
+      "confidence": 0.6345269083976746,
+      "probabilities": {
+        "pass": 0.6345269083976746,
+        "drive": 0.18358094990253448,
+        "high_pass": 0.0027778197545558214,
+        "header": 0.007987343706190586,
+        "throw_in": 0.005179089494049549,
+        "background": 0.16594788432121277
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 1806,
+      "tracker_id": 9348,
+      "label": "pass",
+      "confidence": 0.9840770363807678,
+      "probabilities": {
+        "pass": 0.9840770363807678,
+        "drive": 0.010916726663708687,
+        "high_pass": 0.000011604944120335858,
+        "header": 0.003386428114026785,
+        "throw_in": 0.0015424044104292989,
+        "background": 0.00006576592568308115
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 1815,
+      "tracker_id": 9339,
+      "label": "drive",
+      "confidence": 0.6987508535385132,
+      "probabilities": {
+        "pass": 0.06536691635847092,
+        "drive": 0.6987508535385132,
+        "high_pass": 0.00001635023181734141,
+        "header": 0.22985993325710297,
+        "throw_in": 0.0012333779595792294,
+        "background": 0.004772568587213755
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 1819,
+      "tracker_id": 9340,
+      "label": "header",
+      "confidence": 0.8680509328842163,
+      "probabilities": {
+        "pass": 0.13172490894794464,
+        "drive": 0.00017938380187842995,
+        "high_pass": 0.000003300216349089169,
+        "header": 0.8680509328842163,
+        "throw_in": 0.000020832781956414692,
+        "background": 0.00002064861291728448
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 1825,
+      "tracker_id": 9327,
+      "label": "header",
+      "confidence": 0.3949674963951111,
+      "probabilities": {
+        "pass": 0.3808717429637909,
+        "drive": 0.2113942950963974,
+        "high_pass": 0.00005118771150591783,
+        "header": 0.3949674963951111,
+        "throw_in": 0.006814364809542894,
+        "background": 0.00590086355805397
+      },
+      "is_background": false
+    },
+    {
+      "frame_idx": 1828,
+      "tracker_id": 9313,
+      "label": "pass",
+      "confidence": 0.5428179502487183,
+      "probabilities": {
+        "pass": 0.5428179502487183,
+        "drive": 0.2068280726671219,
+        "high_pass": 0.0004175205249339342,
+        "header": 0.2340787798166275,
+        "throw_in": 0.015702566131949425,
+        "background": 0.00015504212933592498
+      },
+      "is_background": false
+    }
+  ],
+  "n_frames": 1875,
+  "n_possession_changes": 25
+}

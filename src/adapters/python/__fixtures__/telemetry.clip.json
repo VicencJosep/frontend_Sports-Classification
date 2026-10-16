@@ -1,0 +1,61 @@
+{
+ "source_video": "/app/datasets/clips_analisis/shots_on_target/shoton12.mp4",
+ "event": {
+  "video_path": "/app/datasets/clips_analisis/shots_on_target/shoton12.mp4",
+  "label": "background_main_camera_center",
+  "confidence": 0.26948526970934744,
+  "probabilities": {
+   "background_close-up_behind_the_goal": 0.06430284792823002,
+   "background_close-up_player_or_field_referee": 0.10971734308810634,
+   "background_close-up_side_staff": 0.18233802697702095,
+   "background_main_camera_center": 0.26948526970934744,
+   "background_main_camera_left": 0.001162990945341459,
+   "background_other": 0.025435932198797237,
+   "background_public": 0.21636302930527118,
+   "card": 0.00092304532376598,
+   "corner": 0.001602996655675782,
+   "foul": 0.0489460086757675,
+   "goal": 0.021332233350631048,
+   "kick-off": 0.0006587740467306492,
+   "penalty": 0.0019649284198903056,
+   "shot": 0.051829600999693665,
+   "substitution": 0.001216621647986683,
+   "throw-in": 0.0027203507277433264
+  },
+  "is_background": true
+ },
+ "ball_actions": [
+  {
+   "frame_idx": 0,
+   "tracker_id": 2,
+   "label": "pass",
+   "confidence": 0.986838161945343,
+   "probabilities": {
+    "pass": 0.986838161945343,
+    "drive": 0.008709849789738655,
+    "high_pass": 0.003280383301898837,
+    "header": 0.0011706146178767085,
+    "throw_in": 1.405199014925529e-07,
+    "background": 8.462820915156044e-07
+   },
+   "is_background": false
+  },
+  {
+   "frame_idx": 34,
+   "tracker_id": 12,
+   "label": "drive",
+   "confidence": 0.9486247301101685,
+   "probabilities": {
+    "pass": 0.04459812119603157,
+    "drive": 0.9486247301101685,
+    "high_pass": 0.0002148337080143392,
+    "header": 0.0065127271227538586,
+    "throw_in": 1.9915869415854104e-05,
+    "background": 2.971437425003387e-05
+   },
+   "is_background": false
+  }
+ ],
+ "n_frames": 50,
+ "n_possession_changes": 2
+}

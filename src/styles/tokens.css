@@ -1,0 +1,88 @@
+/* Design tokens — Football Intelligence by Ugiat.
+   Dark, broadcast-style surface with the Ugiat brand palette (cyan #00aeef, blue #2871cd, navy #17539e)
+   and the brand gradient (ugiat.com). Montserrat for brand/headings, Roboto for UI text. */
+:root {
+  color-scheme: dark;
+
+  /* Brand (ugiat.com) */
+  --brand: #00aeef;
+  --brand-cyan: #43cfff;
+  --brand-blue: #2871cd;
+  --brand-navy: #17539e;
+  --brand-gradient: linear-gradient(130deg, #43cfff, #2871cd 83%, #17539e);
+  --brand-gradient-soft: linear-gradient(130deg, rgba(67, 207, 255, 0.18), rgba(40, 113, 205, 0.18) 83%, rgba(23, 83, 158, 0.18));
+
+  /* Surfaces */
+  --bg: #070b12;
+  --bg-elev-1: #0d131c;
+  --bg-elev-2: #121a26;
+  --bg-elev-3: #19242f;
+  --bg-overlay: rgba(7, 11, 18, 0.74);
+
+  /* Lines */
+  --border: #1d2836;
+  --border-strong: #2a394c;
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+
+  /* Text */
+  --text: #e9eef5;
+  --text-muted: #9fb0c3;
+  --text-faint: #65768b;
+
+  /* Accent (actions, active state) = brand cyan */
+  --accent: #00aeef;
+  --accent-strong: #0a97d1;
+  --accent-soft: rgba(0, 174, 239, 0.14);
+  --accent-text: #04111a;
+
+  /* Semantic */
+  --success: #22c55e;
+  --success-soft: rgba(34, 197, 94, 0.14);
+  --danger: #ef4444;
+  --danger-soft: rgba(239, 68, 68, 0.14);
+  --warning: #f59e0b;
+  --warning-soft: rgba(245, 158, 11, 0.16);
+  --info: #43cfff;
+  --info-soft: rgba(67, 207, 255, 0.14);
+  --neutral-soft: rgba(159, 176, 195, 0.14);
+
+  /* Overlay colours (mirrored in src/domain/display.ts for canvas drawing) */
+  --team-a: #3b82f6;
+  --team-b: #ef4444;
+  --team-neutral: #d1d5db;
+
+  /* Typography */
+  --font-sans: 'Roboto', system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Montserrat', 'Roboto', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --fs-xs: 11px;
+  --fs-sm: 12.5px;
+  --fs-md: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 20px;
+  --fs-2xl: 26px;
+
+  /* Spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+
+  /* Shape */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* Elevation */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --glow-accent: 0 0 0 1px rgba(0, 174, 239, 0.35), 0 8px 30px rgba(0, 174, 239, 0.18);
+
+  /* Layout */
+  --sidebar-w: 224px;
+  --topbar-h: 58px;
+  --content-max: 1480px;
+}

@@ -1,0 +1,179 @@
+{
+  "source_video": "middlesbrough-preston-2019-10-01/parts/second-half/video.mp4",
+  "events": [
+    {
+      "label": "card",
+      "start_s": 0,
+      "end_s": 6,
+      "peak_confidence": 0.45639256409071394,
+      "mean_confidence": 0.357942366695042,
+      "n_windows": 2
+    },
+    {
+      "label": "throw-in",
+      "start_s": 15,
+      "end_s": 21,
+      "peak_confidence": 0.2871956663249772,
+      "mean_confidence": 0.2871956663249772,
+      "n_windows": 1
+    },
+    {
+      "label": "throw-in",
+      "start_s": 21,
+      "end_s": 30,
+      "peak_confidence": 0.5914738174379123,
+      "mean_confidence": 0.45969474081862927,
+      "n_windows": 2
+    },
+    {
+      "label": "card",
+      "start_s": 27,
+      "end_s": 33,
+      "peak_confidence": 0.35544369735697307,
+      "mean_confidence": 0.35544369735697307,
+      "n_windows": 1
+    },
+    {
+      "label": "throw-in",
+      "start_s": 30,
+      "end_s": 36,
+      "peak_confidence": 0.5834881959603248,
+      "mean_confidence": 0.5834881959603248,
+      "n_windows": 1
+    },
+    {
+      "label": "corner",
+      "start_s": 33,
+      "end_s": 39,
+      "peak_confidence": 0.19813421453905888,
+      "mean_confidence": 0.19813421453905888,
+      "n_windows": 1
+    },
+    {
+      "label": "foul",
+      "start_s": 39,
+      "end_s": 45,
+      "peak_confidence": 0.30209394437941167,
+      "mean_confidence": 0.30209394437941167,
+      "n_windows": 1
+    },
+    {
+      "label": "card",
+      "start_s": 42,
+      "end_s": 48,
+      "peak_confidence": 0.2383666481851802,
+      "mean_confidence": 0.2383666481851802,
+      "n_windows": 1
+    },
+    {
+      "label": "substitution",
+      "start_s": 45,
+      "end_s": 51,
+      "peak_confidence": 0.5540864260658743,
+      "mean_confidence": 0.5540864260658743,
+      "n_windows": 1
+    },
+    {
+      "label": "throw-in",
+      "start_s": 60,
+      "end_s": 66,
+      "peak_confidence": 0.703853077206046,
+      "mean_confidence": 0.703853077206046,
+      "n_windows": 1
+    }
+  ],
+  "ball_actions": [
+    {
+      "frame_idx": 895,
+      "tracker_id": 2031,
+      "label": "high_pass",
+      "confidence": 0.962254215580687,
+      "probabilities": {
+        "pass": 0.02337713625696851,
+        "drive": 0.0136846860959486,
+        "high_pass": 0.962254215580687,
+        "header": 0.0004548203896178519,
+        "throw_in": 0.00022914167677799582
+      },
+      "is_background": false,
+      "spot_score": 0.984375
+    },
+    {
+      "frame_idx": 1585,
+      "tracker_id": 2075,
+      "label": "high_pass",
+      "confidence": 0.96044921875,
+      "probabilities": {
+        "pass": 0.00991058349609375,
+        "drive": 0.0018510818481445312,
+        "high_pass": 0.96044921875,
+        "header": 0.00019788742065429688,
+        "throw_in": 0.0015354156494140625
+      },
+      "is_background": false,
+      "spot_score": 0.96044921875
+    },
+    {
+      "frame_idx": 1655,
+      "tracker_id": 2090,
+      "label": "drive",
+      "confidence": 0.5767240974145132,
+      "probabilities": {
+        "pass": 0.26381859952162245,
+        "drive": 0.5767240974145132,
+        "high_pass": 0.07379387872842201,
+        "header": 0.08488941212961683,
+        "throw_in": 0.0007740122058254806
+      },
+      "is_background": false,
+      "spot_score": 0.59228515625
+    },
+    {
+      "frame_idx": 1673,
+      "tracker_id": 2090,
+      "label": "pass",
+      "confidence": 0.5025812638487032,
+      "probabilities": {
+        "pass": 0.5025812638487032,
+        "drive": 0.39278839728546594,
+        "high_pass": 0.08889934703845033,
+        "header": 0.005981594217272249,
+        "throw_in": 0.009749397610108304
+      },
+      "is_background": false,
+      "spot_score": 0.9384765625
+    },
+    {
+      "frame_idx": 1745,
+      "tracker_id": 2109,
+      "label": "header",
+      "confidence": 0.9985329547900318,
+      "probabilities": {
+        "pass": 0.0007021083234684142,
+        "drive": 0.0006378619977308555,
+        "high_pass": 0.00010794792866662417,
+        "header": 0.9985329547900318,
+        "throw_in": 0.000019126960102250174
+      },
+      "is_background": false,
+      "spot_score": 0.98291015625
+    },
+    {
+      "frame_idx": 1801,
+      "tracker_id": 2113,
+      "label": "pass",
+      "confidence": 0.9465655790993198,
+      "probabilities": {
+        "pass": 0.9465655790993198,
+        "drive": 0.052016076063173974,
+        "high_pass": 0.0001794375842794784,
+        "header": 0.0008163411325880332,
+        "throw_in": 0.0004225661206385889
+      },
+      "is_background": false,
+      "spot_score": 0.95263671875
+    }
+  ],
+  "n_frames": 1875,
+  "n_possession_changes": 6
+}

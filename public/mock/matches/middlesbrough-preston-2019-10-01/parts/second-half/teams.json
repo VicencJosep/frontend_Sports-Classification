@@ -1,0 +1,675 @@
+{
+  "source_video": "middlesbrough-preston-2019-10-01/parts/second-half/video.mp4",
+  "tracks_jsonl": "tracks.jsonl",
+  "embedder": "prtreid",
+  "embedding_dim": 256,
+  "n_clusters": 2,
+  "random_state": 0,
+  "teams": [
+    {
+      "tracker_id": 1941,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1940,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1943,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1946,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1948,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1947,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1944,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1953,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1955,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1956,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1960,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1951,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1962,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1965,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1967,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1971,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1973,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1975,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1974,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1976,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1977,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1978,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1979,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1980,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1981,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1982,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1983,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1984,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1985,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1986,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1989,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1987,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1988,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1990,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1993,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1992,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1994,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 1995,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1996,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1997,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 1998,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2001,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2002,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2003,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2004,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2005,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2006,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2008,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2009,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2007,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2010,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2012,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2011,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2014,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2013,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2016,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2017,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2018,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2019,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2020,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2021,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2022,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2023,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2025,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2026,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2024,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2027,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2028,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2029,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2030,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2031,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2032,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2033,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2034,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2035,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2036,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2037,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2038,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2039,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2040,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2041,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2042,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2043,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2044,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2045,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2046,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2048,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2049,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2050,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2051,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2052,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2054,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2055,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2056,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2057,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2058,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2060,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2061,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2062,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2063,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2064,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2065,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2066,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2067,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2068,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2069,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2070,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2071,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2073,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2074,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2076,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2078,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2079,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2080,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2081,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2082,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2083,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2084,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2085,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2086,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2088,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2090,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2089,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2091,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2092,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2093,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2094,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2095,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2096,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2097,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2098,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2087,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2099,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2100,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2101,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2102,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2103,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2105,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2104,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2106,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2107,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2108,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2109,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2111,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2110,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2112,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2113,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2115,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2116,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 2117,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 2119,
+      "team_cluster": 1
+    }
+  ],
+  "excluded": [
+    {
+      "tracker_id": 1942,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 1964,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 1991,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 1999,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 2000,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 2015,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 2047,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 2053,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 2059,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 2072,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 2075,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 2077,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 2114,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 2118,
+      "reason": "never_player"
+    }
+  ],
+  "n_frames_processed": 1875,
+  "n_crops_embedded": 256717,
+  "n_crops_skipped_degenerate": 0
+}

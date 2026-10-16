@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-05T11:36:04.215Z",
+  "matches": [
+    {
+      "id": "middlesbrough-preston-2019-10-01",
+      "name": "Middlesbrough vs Preston North End",
+      "homeTeam": "Middlesbrough",
+      "awayTeam": "Preston North End",
+      "date": "2019-10-01",
+      "score": null,
+      "status": "completed",
+      "errorMessage": null,
+      "isDemo": true,
+      "note": "Two 75 s excerpts of a real 20-minute analysis run (T-DEED shots and ball actions, V-JEPA2 events, PnLCalib field coordinates, possession). Labelled as halves to exercise the two-part flow.",
+      "createdAt": "2019-10-01T12:00:00.000Z",
+      "parts": [
+        {
+          "id": "first-half",
+          "kind": "first-half",
+          "label": "First half (excerpt)",
+          "mode": "full-match",
+          "status": "completed",
+          "video": {
+            "file": "parts/first-half/video.mp4",
+            "width": 1280,
+            "height": 720,
+            "fps": 25,
+            "frameCount": 1875,
+            "durationS": 75,
+            "startTimeS": 0
+          },
+          "files": {
+            "tracks": "parts/first-half/tracks.jsonl",
+            "teams": "parts/first-half/teams.json",
+            "telemetry": "parts/first-half/telemetry.json"
+          },
+          "sourceVideoPath": "ground_truth/2019-10-01_Middlesbrough-Preston_North_End-720p-trim.mp4",
+          "sourceWindow": {
+            "startS": 585,
+            "endS": 660
+          },
+          "stats": {
+            "frames": 1875,
+            "events": 5,
+            "ballActions": 30,
+            "tracklets": 213,
+            "hasFieldCoordinates": true,
+            "hasPossession": true
+          }
+        },
+        {
+          "id": "second-half",
+          "kind": "second-half",
+          "label": "Second half (excerpt)",
+          "mode": "full-match",
+          "status": "completed",
+          "video": {
+            "file": "parts/second-half/video.mp4",
+            "width": 1280,
+            "height": 720,
+            "fps": 25,
+            "frameCount": 1875,
+            "durationS": 75,
+            "startTimeS": 0
+          },
+          "files": {
+            "tracks": "parts/second-half/tracks.jsonl",
+            "teams": "parts/second-half/teams.json",
+            "telemetry": "parts/second-half/telemetry.json"
+          },
+          "sourceVideoPath": "ground_truth/2019-10-01_Middlesbrough-Preston_North_End-720p-trim.mp4",
+          "sourceWindow": {
+            "startS": 945,
+            "endS": 1020
+          },
+          "stats": {
+            "frames": 1875,
+            "events": 10,
+            "ballActions": 6,
+            "tracklets": 165,
+            "hasFieldCoordinates": true,
+            "hasPossession": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "hull-sheffield-wednesday-2019-10-01",
+      "name": "Hull City vs Sheffield Wednesday",
+      "homeTeam": "Hull City",
+      "awayTeam": "Sheffield Wednesday",
+      "date": "2019-10-01",
+      "score": null,
+      "status": "completed",
+      "errorMessage": null,
+      "isDemo": true,
+      "note": "75 s excerpt of a real full-match run (V-JEPA2 events, R3D-18 ball actions, possession). No field calibration was run on this match, so pitch coordinates are absent.",
+      "createdAt": "2019-10-01T12:00:00.000Z",
+      "parts": [
+        {
+          "id": "full",
+          "kind": "full",
+          "label": "Full match (excerpt)",
+          "mode": "full-match",
+          "status": "completed",
+          "video": {
+            "file": "parts/full/video.mp4",
+            "width": 1280,
+            "height": 720,
+            "fps": 25,
+            "frameCount": 1875,
+            "durationS": 75,
+            "startTimeS": 0
+          },
+          "files": {
+            "tracks": "parts/full/tracks.jsonl",
+            "teams": "parts/full/teams.json",
+            "telemetry": "parts/full/telemetry.json"
+          },
+          "sourceVideoPath": "datasets/SoccerNet/england_efl/2019-2020/2019-10-01 - Hull City - Sheffield Wednesday/720p.mp4",
+          "sourceWindow": {
+            "startS": 4410,
+            "endS": 4485
+          },
+          "stats": {
+            "frames": 1875,
+            "events": 14,
+            "ballActions": 25,
+            "tracklets": 177,
+            "hasFieldCoordinates": false,
+            "hasPossession": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "leeds-west-bromwich-2019-10-01",
+      "name": "Leeds United vs West Bromwich",
+      "homeTeam": "Leeds United",
+      "awayTeam": "West Bromwich",
+      "date": "2019-10-01",
+      "score": null,
+      "status": "processing",
+      "errorMessage": null,
+      "isDemo": true,
+      "note": "Metadata-only demo entry: shows the processing state. No analysis files.",
+      "createdAt": "2019-10-01T12:00:00.000Z",
+      "parts": [
+        {
+          "id": "first-half",
+          "kind": "first-half",
+          "label": "First half",
+          "mode": "full-match",
+          "status": "completed",
+          "video": null,
+          "files": null,
+          "sourceVideoPath": null,
+          "sourceWindow": null,
+          "stats": null
+        },
+        {
+          "id": "second-half",
+          "kind": "second-half",
+          "label": "Second half",
+          "mode": "full-match",
+          "status": "processing",
+          "video": null,
+          "files": null,
+          "sourceVideoPath": null,
+          "sourceWindow": null,
+          "stats": null
+        }
+      ]
+    },
+    {
+      "id": "stoke-huddersfield-2019-10-01",
+      "name": "Stoke City vs Huddersfield Town",
+      "homeTeam": "Stoke City",
+      "awayTeam": "Huddersfield Town",
+      "date": "2019-10-01",
+      "score": null,
+      "status": "pending",
+      "errorMessage": null,
+      "isDemo": true,
+      "note": "Metadata-only demo entry: queued, not analysed yet.",
+      "createdAt": "2019-10-01T12:00:00.000Z",
+      "parts": [
+        {
+          "id": "full",
+          "kind": "full",
+          "label": "Full match",
+          "mode": "full-match",
+          "status": "pending",
+          "video": null,
+          "files": null,
+          "sourceVideoPath": null,
+          "sourceWindow": null,
+          "stats": null
+        }
+      ]
+    },
+    {
+      "id": "reading-fulham-2019-10-01",
+      "name": "Reading vs Fulham",
+      "homeTeam": "Reading",
+      "awayTeam": "Fulham",
+      "date": "2019-10-01",
+      "score": null,
+      "status": "error",
+      "errorMessage": "Analysis failed. Check the pipeline logs for this run.",
+      "isDemo": true,
+      "note": "Metadata-only demo entry: shows the error state.",
+      "createdAt": "2019-10-01T12:00:00.000Z",
+      "parts": [
+        {
+          "id": "full",
+          "kind": "full",
+          "label": "Full match",
+          "mode": "full-match",
+          "status": "error",
+          "video": null,
+          "files": null,
+          "sourceVideoPath": null,
+          "sourceWindow": null,
+          "stats": null
+        }
+      ]
+    }
+  ]
+}

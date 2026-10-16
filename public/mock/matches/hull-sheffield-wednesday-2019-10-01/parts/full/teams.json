@@ -1,0 +1,723 @@
+{
+  "source_video": "hull-sheffield-wednesday-2019-10-01/parts/full/video.mp4",
+  "tracks_jsonl": "tracks.jsonl",
+  "embedder": "prtreid",
+  "embedding_dim": 256,
+  "n_clusters": 2,
+  "random_state": 0,
+  "teams": [
+    {
+      "tracker_id": 9157,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9166,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9169,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9171,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9172,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9170,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9174,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9175,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9176,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9177,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9178,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9180,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9182,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9181,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9179,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9186,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9191,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9192,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9193,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9194,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9197,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9202,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9198,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9201,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9200,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9203,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9199,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9205,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9206,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9207,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9208,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9209,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9212,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9211,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9210,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9213,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9214,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9215,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9216,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9217,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9218,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9219,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9220,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9221,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9222,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9223,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9224,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9226,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9227,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9228,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9229,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9230,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9232,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9233,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9234,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9235,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9236,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9237,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9238,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9240,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9241,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9231,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9239,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9242,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9243,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9244,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9245,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9246,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9247,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9248,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9249,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9250,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9251,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9252,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9253,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9254,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9255,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9256,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9257,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9258,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9259,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9260,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9261,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9262,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9263,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9265,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9264,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9266,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9267,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9268,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9269,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9270,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9271,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9274,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9275,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9273,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9276,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9278,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9277,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9281,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9279,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9280,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9283,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9284,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9282,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9285,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9286,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9288,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9287,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9289,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9291,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9290,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9292,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9294,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9296,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9272,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9298,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9299,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9301,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9303,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9305,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9307,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9308,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9310,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9311,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9312,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9314,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9315,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9313,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9318,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9317,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9319,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9320,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9322,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9323,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9324,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9316,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9326,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9327,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9329,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9330,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9331,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9332,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9333,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9328,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9334,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9336,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9337,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9338,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9339,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9340,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9341,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9342,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9344,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9345,
+      "team_cluster": 1
+    },
+    {
+      "tracker_id": 9348,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9349,
+      "team_cluster": 0
+    },
+    {
+      "tracker_id": 9350,
+      "team_cluster": 0
+    }
+  ],
+  "excluded": [
+    {
+      "tracker_id": 9190,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9195,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9196,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9204,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9225,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9293,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9295,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9297,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9300,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9302,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9304,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9306,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9309,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9321,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9325,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9335,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9343,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9346,
+      "reason": "never_player"
+    },
+    {
+      "tracker_id": 9347,
+      "reason": "never_player"
+    }
+  ],
+  "n_frames_processed": 1875,
+  "n_crops_embedded": 1233143,
+  "n_crops_skipped_degenerate": 0
+}

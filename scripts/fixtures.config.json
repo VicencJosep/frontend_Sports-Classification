@@ -1,0 +1,113 @@
+{
+  "$comment": "Fixture recipe for scripts/build-fixtures.mjs. Every path under `parts` is relative to pythonProjectDir and is READ ONLY. Match metadata (name, teams, date, status) is frontend-owned demo data: the Python project has no such fields.",
+  "pythonProjectDir": "../Sports-Classification",
+  "ffmpeg": { "crf": 23, "preset": "medium", "audioBitrate": "96k" },
+  "matches": [
+    {
+      "id": "middlesbrough-preston-2019-10-01",
+      "name": "Middlesbrough vs Preston North End",
+      "homeTeam": "Middlesbrough",
+      "awayTeam": "Preston North End",
+      "date": "2019-10-01",
+      "score": null,
+      "status": "completed",
+      "isDemo": true,
+      "note": "Two 75 s excerpts of a real 20-minute analysis run (T-DEED shots and ball actions, V-JEPA2 events, PnLCalib field coordinates, possession). Labelled as halves to exercise the two-part flow.",
+      "parts": [
+        {
+          "id": "first-half",
+          "kind": "first-half",
+          "label": "First half (excerpt)",
+          "video": "ground_truth/2019-10-01_Middlesbrough-Preston_North_End-720p-trim.mp4",
+          "tracks": "output/homography_demo/tracks_2d.jsonl",
+          "possession": "ground_truth/2019-10-01_Middlesbrough-Preston_North_End-720p-trim.possession.jsonl",
+          "telemetry": "output/tdeed_demo/telemetry.json",
+          "teams": "output/middlesbrough_preston_eva-v3_1/teams.json",
+          "startS": 585,
+          "durationS": 75
+        },
+        {
+          "id": "second-half",
+          "kind": "second-half",
+          "label": "Second half (excerpt)",
+          "video": "ground_truth/2019-10-01_Middlesbrough-Preston_North_End-720p-trim.mp4",
+          "tracks": "output/homography_demo/tracks_2d.jsonl",
+          "possession": "ground_truth/2019-10-01_Middlesbrough-Preston_North_End-720p-trim.possession.jsonl",
+          "telemetry": "output/tdeed_demo/telemetry.json",
+          "teams": "output/middlesbrough_preston_eva-v3_1/teams.json",
+          "startS": 945,
+          "durationS": 75
+        }
+      ]
+    },
+    {
+      "id": "hull-sheffield-wednesday-2019-10-01",
+      "name": "Hull City vs Sheffield Wednesday",
+      "homeTeam": "Hull City",
+      "awayTeam": "Sheffield Wednesday",
+      "date": "2019-10-01",
+      "score": null,
+      "status": "completed",
+      "isDemo": true,
+      "note": "75 s excerpt of a real full-match run (V-JEPA2 events, R3D-18 ball actions, possession). No field calibration was run on this match, so pitch coordinates are absent.",
+      "parts": [
+        {
+          "id": "full",
+          "kind": "full",
+          "label": "Full match (excerpt)",
+          "video": "datasets/SoccerNet/england_efl/2019-2020/2019-10-01 - Hull City - Sheffield Wednesday/720p.mp4",
+          "tracks": "datasets/SoccerNet/england_efl/2019-2020/2019-10-01 - Hull City - Sheffield Wednesday/720p.tracks.jsonl",
+          "possession": "datasets/SoccerNet/england_efl/2019-2020/2019-10-01 - Hull City - Sheffield Wednesday/720p.possession.jsonl",
+          "telemetry": "output/fullmatch_hull_validation/telemetry.json",
+          "teams": "output/fullmatch_hull_validation/teams.json",
+          "startS": 4410,
+          "durationS": 75
+        }
+      ]
+    },
+    {
+      "id": "leeds-west-bromwich-2019-10-01",
+      "name": "Leeds United vs West Bromwich",
+      "homeTeam": "Leeds United",
+      "awayTeam": "West Bromwich",
+      "date": "2019-10-01",
+      "score": null,
+      "status": "processing",
+      "isDemo": true,
+      "note": "Metadata-only demo entry: shows the processing state. No analysis files.",
+      "parts": [
+        { "id": "first-half", "kind": "first-half", "label": "First half", "status": "completed" },
+        { "id": "second-half", "kind": "second-half", "label": "Second half", "status": "processing" }
+      ]
+    },
+    {
+      "id": "stoke-huddersfield-2019-10-01",
+      "name": "Stoke City vs Huddersfield Town",
+      "homeTeam": "Stoke City",
+      "awayTeam": "Huddersfield Town",
+      "date": "2019-10-01",
+      "score": null,
+      "status": "pending",
+      "isDemo": true,
+      "note": "Metadata-only demo entry: queued, not analysed yet.",
+      "parts": [
+        { "id": "full", "kind": "full", "label": "Full match", "status": "pending" }
+      ]
+    },
+    {
+      "id": "reading-fulham-2019-10-01",
+      "name": "Reading vs Fulham",
+      "homeTeam": "Reading",
+      "awayTeam": "Fulham",
+      "date": "2019-10-01",
+      "score": null,
+      "status": "error",
+      "errorMessage": "Analysis failed. Check the pipeline logs for this run.",
+      "isDemo": true,
+      "note": "Metadata-only demo entry: shows the error state.",
+      "parts": [
+        { "id": "full", "kind": "full", "label": "Full match", "status": "error" }
+      ]
+    }
+  ]
+}

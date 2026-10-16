@@ -1,0 +1,499 @@
+{
+  "source_video": "middlesbrough-preston-2019-10-01/parts/first-half/video.mp4",
+  "events": [
+    {
+      "label": "throw-in",
+      "start_s": 0,
+      "end_s": 6,
+      "peak_confidence": 0.49893518133863757,
+      "mean_confidence": 0.44904300868933694,
+      "n_windows": 3
+    },
+    {
+      "label": "shot",
+      "start_s": 6.64,
+      "end_s": 8.64,
+      "peak_confidence": 0.8249104817708333,
+      "mean_confidence": 0.8249104817708333,
+      "n_windows": 1
+    },
+    {
+      "label": "foul",
+      "start_s": 9,
+      "end_s": 15,
+      "peak_confidence": 0.28685218210632135,
+      "mean_confidence": 0.28685218210632135,
+      "n_windows": 1
+    },
+    {
+      "label": "foul",
+      "start_s": 57,
+      "end_s": 63,
+      "peak_confidence": 0.24888066440696033,
+      "mean_confidence": 0.24888066440696033,
+      "n_windows": 1
+    },
+    {
+      "label": "card",
+      "start_s": 66,
+      "end_s": 72,
+      "peak_confidence": 0.7833666294492843,
+      "mean_confidence": 0.7833666294492843,
+      "n_windows": 1
+    }
+  ],
+  "ball_actions": [
+    {
+      "frame_idx": 77,
+      "tracker_id": 1212,
+      "label": "high_pass",
+      "confidence": 0.9185013568241083,
+      "probabilities": {
+        "pass": 0.07076362123780014,
+        "drive": 0.007455172636646708,
+        "high_pass": 0.9185013568241083,
+        "header": 0.0004108152555891872,
+        "throw_in": 0.0028690340458557124
+      },
+      "is_background": false,
+      "spot_score": 0.9697265625
+    },
+    {
+      "frame_idx": 135,
+      "tracker_id": 1241,
+      "label": "header",
+      "confidence": 0.9779893750718555,
+      "probabilities": {
+        "pass": 0.004344601599637238,
+        "drive": 0.017192955831821243,
+        "high_pass": 0.00036553368952479525,
+        "header": 0.9779893750718555,
+        "throw_in": 0.00010753380716125734
+      },
+      "is_background": false,
+      "spot_score": 0.60498046875
+    },
+    {
+      "frame_idx": 167,
+      "tracker_id": 1241,
+      "label": "drive",
+      "confidence": 0.9067977070235111,
+      "probabilities": {
+        "pass": 0.08448669626054961,
+        "drive": 0.9067977070235111,
+        "high_pass": 0.0032856324444823933,
+        "header": 0.004310205837227016,
+        "throw_in": 0.0011197584342298058
+      },
+      "is_background": false,
+      "spot_score": 0.68798828125
+    },
+    {
+      "frame_idx": 265,
+      "tracker_id": 1263,
+      "label": "drive",
+      "confidence": 0.9283513137380929,
+      "probabilities": {
+        "pass": 0.07035200101946566,
+        "drive": 0.9283513137380929,
+        "high_pass": 0.0004134118342717085,
+        "header": 0.00041667225950803885,
+        "throw_in": 0.0004666011486616844
+      },
+      "is_background": false,
+      "spot_score": 0.529296875
+    },
+    {
+      "frame_idx": 283,
+      "tracker_id": 1263,
+      "label": "pass",
+      "confidence": 0.9972119665025759,
+      "probabilities": {
+        "pass": 0.9972119665025759,
+        "drive": 0.0009371744607207487,
+        "high_pass": 0.0017482800046344452,
+        "header": 0.00009384041573522515,
+        "throw_in": 0.000008738616333595107
+      },
+      "is_background": false,
+      "spot_score": 0.98681640625
+    },
+    {
+      "frame_idx": 313,
+      "tracker_id": 1261,
+      "label": "drive",
+      "confidence": 0.9681775244612253,
+      "probabilities": {
+        "pass": 0.019141424120175707,
+        "drive": 0.9681775244612253,
+        "high_pass": 0.001221799649411262,
+        "header": 0.011209087451717106,
+        "throw_in": 0.000250164317470593
+      },
+      "is_background": false,
+      "spot_score": 0.9521484375
+    },
+    {
+      "frame_idx": 341,
+      "tracker_id": 1235,
+      "label": "pass",
+      "confidence": 0.9891587888846526,
+      "probabilities": {
+        "pass": 0.9891587888846526,
+        "drive": 0.0036761017650973186,
+        "high_pass": 0.0023613245700323336,
+        "header": 0.002965239628722629,
+        "throw_in": 0.0018385451514950888
+      },
+      "is_background": false,
+      "spot_score": 0.9765625
+    },
+    {
+      "frame_idx": 379,
+      "tracker_id": 1235,
+      "label": "drive",
+      "confidence": 0.9300876600553333,
+      "probabilities": {
+        "pass": 0.03088589532161101,
+        "drive": 0.9300876600553333,
+        "high_pass": 0.002790941716016921,
+        "header": 0.03340494908566476,
+        "throw_in": 0.002830553821374048
+      },
+      "is_background": false,
+      "spot_score": 0.98583984375
+    },
+    {
+      "frame_idx": 411,
+      "tracker_id": 1235,
+      "label": "high_pass",
+      "confidence": 0.72265625,
+      "probabilities": {
+        "pass": 0.2978515625,
+        "drive": 0.003803253173828125,
+        "high_pass": 0.72265625,
+        "header": 0.00054168701171875,
+        "throw_in": 0.00044608116149902344
+      },
+      "is_background": false,
+      "spot_score": 0.72265625
+    },
+    {
+      "frame_idx": 477,
+      "tracker_id": 1284,
+      "label": "drive",
+      "confidence": 0.9959392705143645,
+      "probabilities": {
+        "pass": 0.002898999401682032,
+        "drive": 0.9959392705143645,
+        "high_pass": 0.00003416753535550576,
+        "header": 0.001093388393371314,
+        "throw_in": 0.000034174155226685145
+      },
+      "is_background": false,
+      "spot_score": 0.9833984375
+    },
+    {
+      "frame_idx": 553,
+      "tracker_id": 1291,
+      "label": "pass",
+      "confidence": 0.9998954721021602,
+      "probabilities": {
+        "pass": 0.9998954721021602,
+        "drive": 0.00007293638560196173,
+        "high_pass": 0.000015031183469281258,
+        "header": 0.000011065278994774347,
+        "throw_in": 0.000005495049773777138
+      },
+      "is_background": false,
+      "spot_score": 0.994140625
+    },
+    {
+      "frame_idx": 583,
+      "tracker_id": 1295,
+      "label": "drive",
+      "confidence": 0.9971955044721188,
+      "probabilities": {
+        "pass": 0.0013622710536590288,
+        "drive": 0.9971955044721188,
+        "high_pass": 0.00016508998430987814,
+        "header": 0.001100672389610228,
+        "throw_in": 0.0001764621003020715
+      },
+      "is_background": false,
+      "spot_score": 0.994140625
+    },
+    {
+      "frame_idx": 649,
+      "tracker_id": 1295,
+      "label": "high_pass",
+      "confidence": 0.9496342070915006,
+      "probabilities": {
+        "pass": 0.05027469708346962,
+        "drive": 0.00005110033787536587,
+        "high_pass": 0.9496342070915006,
+        "header": 0.000018748324103421317,
+        "throw_in": 0.00002124716305097079
+      },
+      "is_background": false,
+      "spot_score": 0.80859375
+    },
+    {
+      "frame_idx": 669,
+      "tracker_id": 1220,
+      "label": "header",
+      "confidence": 0.94921875,
+      "probabilities": {
+        "pass": 0.0238800048828125,
+        "drive": 0.0057220458984375,
+        "high_pass": 0.0114898681640625,
+        "header": 0.94921875,
+        "throw_in": 0.0005030632019042969
+      },
+      "is_background": false,
+      "spot_score": 0.94921875
+    },
+    {
+      "frame_idx": 731,
+      "tracker_id": 1334,
+      "label": "pass",
+      "confidence": 0.9978414611338846,
+      "probabilities": {
+        "pass": 0.9978414611338846,
+        "drive": 0.0011505057585005673,
+        "high_pass": 0.0004833290575576577,
+        "header": 0.0004448995160710356,
+        "throw_in": 0.00007980453398612071
+      },
+      "is_background": false,
+      "spot_score": 0.990234375
+    },
+    {
+      "frame_idx": 769,
+      "tracker_id": 1332,
+      "label": "high_pass",
+      "confidence": 0.9960297952862737,
+      "probabilities": {
+        "pass": 0.0024815806554572503,
+        "drive": 0.00021347919894499989,
+        "high_pass": 0.9960297952862737,
+        "header": 0.0012550422028836917,
+        "throw_in": 0.0000201026564403362
+      },
+      "is_background": false,
+      "spot_score": 0.95751953125
+    },
+    {
+      "frame_idx": 831,
+      "tracker_id": 1341,
+      "label": "drive",
+      "confidence": 0.9593152536229538,
+      "probabilities": {
+        "pass": 0.011185361452373581,
+        "drive": 0.9593152536229538,
+        "high_pass": 0.00011282042151087232,
+        "header": 0.02746522540279508,
+        "throw_in": 0.0019213391003667774
+      },
+      "is_background": false,
+      "spot_score": 0.95947265625
+    },
+    {
+      "frame_idx": 881,
+      "tracker_id": 1343,
+      "label": "high_pass",
+      "confidence": 0.8340830785934735,
+      "probabilities": {
+        "pass": 0.16565341648266144,
+        "drive": 0.00017634907644791285,
+        "high_pass": 0.8340830785934735,
+        "header": 0.00006130452808087895,
+        "throw_in": 0.000025851319336167762
+      },
+      "is_background": false,
+      "spot_score": 0.71923828125
+    },
+    {
+      "frame_idx": 969,
+      "tracker_id": 1353,
+      "label": "drive",
+      "confidence": 0.9803758039087532,
+      "probabilities": {
+        "pass": 0.019234241376059558,
+        "drive": 0.9803758039087532,
+        "high_pass": 0.000047423901993098474,
+        "header": 0.000023126321243908314,
+        "throw_in": 0.0003194044919501954
+      },
+      "is_background": false,
+      "spot_score": 0.890625
+    },
+    {
+      "frame_idx": 1059,
+      "tracker_id": 1354,
+      "label": "pass",
+      "confidence": 0.9990963532153321,
+      "probabilities": {
+        "pass": 0.9990963532153321,
+        "drive": 0.0007524521661141676,
+        "high_pass": 0.00009215067024967394,
+        "header": 0.000017813955316653855,
+        "throw_in": 0.000041229992987396486
+      },
+      "is_background": false,
+      "spot_score": 0.970703125
+    },
+    {
+      "frame_idx": 1087,
+      "tracker_id": 1366,
+      "label": "drive",
+      "confidence": 0.9879058546910855,
+      "probabilities": {
+        "pass": 0.011718990538972084,
+        "drive": 0.9879058546910855,
+        "high_pass": 0.00015290269986972989,
+        "header": 0.00017770021241507867,
+        "throw_in": 0.000044551857657587725
+      },
+      "is_background": false,
+      "spot_score": 0.9765625
+    },
+    {
+      "frame_idx": 1127,
+      "tracker_id": 1366,
+      "label": "pass",
+      "confidence": 0.864037966777039,
+      "probabilities": {
+        "pass": 0.864037966777039,
+        "drive": 0.0015835437591224454,
+        "high_pass": 0.13398272723763405,
+        "header": 0.000058123675268693907,
+        "throw_in": 0.0003376385509356507
+      },
+      "is_background": false,
+      "spot_score": 0.974609375
+    },
+    {
+      "frame_idx": 1151,
+      "tracker_id": 1376,
+      "label": "drive",
+      "confidence": 0.9457642768721652,
+      "probabilities": {
+        "pass": 0.05282878056827328,
+        "drive": 0.9457642768721652,
+        "high_pass": 0.00012666560339757643,
+        "header": 0.0005364660667716622,
+        "throw_in": 0.00074381088939232
+      },
+      "is_background": false,
+      "spot_score": 0.9814453125
+    },
+    {
+      "frame_idx": 1207,
+      "tracker_id": 1380,
+      "label": "pass",
+      "confidence": 0.9994729733294581,
+      "probabilities": {
+        "pass": 0.9994729733294581,
+        "drive": 0.00047031134238254604,
+        "high_pass": 0.000025374604615294545,
+        "header": 0.000017870791125603233,
+        "throw_in": 0.000013469932418529029
+      },
+      "is_background": false,
+      "spot_score": 0.97705078125
+    },
+    {
+      "frame_idx": 1227,
+      "tracker_id": 1372,
+      "label": "drive",
+      "confidence": 0.9633568578047478,
+      "probabilities": {
+        "pass": 0.035693896284480234,
+        "drive": 0.9633568578047478,
+        "high_pass": 0.0006932609926061993,
+        "header": 0.00013743834523218822,
+        "throw_in": 0.00011854657293354452
+      },
+      "is_background": false,
+      "spot_score": 0.98291015625
+    },
+    {
+      "frame_idx": 1299,
+      "tracker_id": 1372,
+      "label": "pass",
+      "confidence": 0.9994059661086,
+      "probabilities": {
+        "pass": 0.9994059661086,
+        "drive": 0.0003187927766214472,
+        "high_pass": 0.00022215839442226028,
+        "header": 0.00003682565513272233,
+        "throw_in": 0.000016257065223609615
+      },
+      "is_background": false,
+      "spot_score": 0.97314453125
+    },
+    {
+      "frame_idx": 1345,
+      "tracker_id": 1383,
+      "label": "drive",
+      "confidence": 0.9760073800197505,
+      "probabilities": {
+        "pass": 0.02245646350844744,
+        "drive": 0.9760073800197505,
+        "high_pass": 0.000583504077363496,
+        "header": 0.00040625932298757095,
+        "throw_in": 0.0005463930714509445
+      },
+      "is_background": false,
+      "spot_score": 0.8134765625
+    },
+    {
+      "frame_idx": 1415,
+      "tracker_id": 1384,
+      "label": "drive",
+      "confidence": 0.9909404375842144,
+      "probabilities": {
+        "pass": 0.008097987674360757,
+        "drive": 0.9909404375842144,
+        "high_pass": 0.0002937363342682955,
+        "header": 0.0003859847668035284,
+        "throw_in": 0.0002818536403530954
+      },
+      "is_background": false,
+      "spot_score": 0.904296875
+    },
+    {
+      "frame_idx": 1465,
+      "tracker_id": 1384,
+      "label": "pass",
+      "confidence": 0.9356929307095071,
+      "probabilities": {
+        "pass": 0.9356929307095071,
+        "drive": 0.000248481544410128,
+        "high_pass": 0.05836600265885498,
+        "header": 0.005081976158853851,
+        "throw_in": 0.000610608928373901
+      },
+      "is_background": false,
+      "spot_score": 0.7265625
+    },
+    {
+      "frame_idx": 1501,
+      "tracker_id": 1401,
+      "label": "drive",
+      "confidence": 0.9988044354628691,
+      "probabilities": {
+        "pass": 0.0011458339075703938,
+        "drive": 0.9988044354628691,
+        "high_pass": 0.000018675880046868614,
+        "header": 0.000017772770177702506,
+        "throw_in": 0.000013281979335987484
+      },
+      "is_background": false,
+      "spot_score": 0.9873046875
+    }
+  ],
+  "n_frames": 1875,
+  "n_possession_changes": 30
+}
