@@ -1,10 +1,13 @@
 import type {
   BallAction,
   BallDetection,
+  HighlightClip,
+  HighlightsSummary,
   Match,
   MatchAnalysis,
   MatchEvent,
   MatchPart,
+  PartHighlights,
   PersonDetection,
   TeamAssignments,
   TeamInfo,
@@ -16,6 +19,9 @@ import { deriveMatchStatus, isAnalysisStatus, isPartKind, isRole, makeTeamInfo, 
 import type {
   ApiBallAction,
   ApiBallDetection,
+  ApiHighlightClip,
+  ApiHighlightsResponse,
+  ApiHighlightsSummary,
   ApiMatch,
   ApiMatchEvent,
   ApiMatchPart,
@@ -44,6 +50,15 @@ export function toVideoInfo(video: ApiVideo, baseUrl: string): VideoInfo {
   }
 }
 
+export function toHighlightsSummary(summary: ApiHighlightsSummary): HighlightsSummary {
+  return {
+    status: isAnalysisStatus(summary.status) ? summary.status : 'pending',
+    stage: summary.stage,
+    nClips: summary.n_clips,
+    error: summary.error,
+  }
+}
+
 export function toMatchPart(part: ApiMatchPart, baseUrl: string): MatchPart {
   return {
     id: part.id,
@@ -53,6 +68,39 @@ export function toMatchPart(part: ApiMatchPart, baseUrl: string): MatchPart {
     status: isAnalysisStatus(part.status) ? part.status : 'pending',
     stage: part.stage,
     video: part.video ? toVideoInfo(part.video, baseUrl) : null,
+    highlights: part.highlights ? toHighlightsSummary(part.highlights) : null,
+  }
+}
+
+export function toHighlightClip(clip: ApiHighlightClip, baseUrl: string): HighlightClip {
+  return {
+    id: clip.id,
+    rank: clip.rank,
+    label: clip.label,
+    title: clip.title,
+    description: clip.description,
+    startS: clip.start_s,
+    endS: clip.end_s,
+    durationS: clip.duration_s,
+    anchorS: clip.anchor_s,
+    teamCluster: clip.team_cluster,
+    finalScore: clip.final_score,
+    vlmRank: clip.vlm_rank,
+    contentUrl: clip.content_url ? resolveContentUrl(baseUrl, clip.content_url) : null,
+  }
+}
+
+export function toPartHighlights(response: ApiHighlightsResponse, baseUrl: string): PartHighlights {
+  return {
+    matchId: response.match_id,
+    partId: response.part_id,
+    status: isAnalysisStatus(response.status) ? response.status : 'pending',
+    stage: response.stage,
+    error: response.error,
+    generatedAt: response.generated_at,
+    vlmModel: response.vlm_model,
+    nCandidates: response.n_candidates,
+    clips: [...response.clips].sort((a, b) => a.rank - b.rank).map((c) => toHighlightClip(c, baseUrl)),
   }
 }
 

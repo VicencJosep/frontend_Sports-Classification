@@ -2,16 +2,17 @@ import { useCallback, useMemo, useReducer, useRef, useState } from 'react'
 
 import { useMatchService } from '@/app/providers/useServices'
 import { useSettings } from '@/app/providers/useSettings'
-import { Badge, ErrorState, Panel, Spinner } from '@/components/common'
+import { Badge, EmptyState, ErrorState, Panel, Spinner } from '@/components/common'
 import { BallActionList, EventList } from '@/components/events'
+import { HighlightsPanel } from '@/components/highlights'
 import { LayerBar } from '@/components/layers/LayerBar'
 import { LayerPanel } from '@/components/layers/LayerPanel'
-import { layerAvailability } from '@/components/layers/layers'
+import { layerAvailability, needsTracking } from '@/components/layers/layers'
 import { TrackletPanel } from '@/components/players/TrackletPanel'
 import { OverlayCanvas } from '@/components/video/OverlayCanvas'
 import { PlayerControls } from '@/components/video/PlayerControls'
 import { VideoStage } from '@/components/video/VideoStage'
-import type { BallAction, Match, MatchEvent, MatchPart, VideoInfo } from '@/domain'
+import type { BallAction, HighlightClip, Match, MatchEvent, MatchPart, PartHighlights, VideoInfo } from '@/domain'
 import { EMPTY_TEAM_ASSIGNMENTS } from '@/domain'
 import { useAsync } from '@/hooks/useAsync'
 import { useTrackingWindows } from '@/hooks/useTrackingWindows'
@@ -37,6 +38,15 @@ export function MatchViewer({ match, part, video }: MatchViewerProps) {
   const { settings } = useSettings()
   const [state, dispatch] = useReducer(viewerReducer, initialViewerState)
   const [muted, setMuted] = useState(false)
+  // What the highlights panel last saw (it polls on its own); the match record's summary is only the initial value.
+  const [highlightsLive, setHighlightsLive] = useState<PartHighlights | null>(null)
+  const highlightsTitle = highlightsLive
+    ? highlightsLive.status === 'completed'
+      ? `Highlights · ${highlightsLive.clips.length}`
+      : 'Highlights'
+    : part.highlights?.status === 'completed'
+      ? `Highlights · ${part.highlights.nClips}`
+      : 'Highlights'
   const playerRef = useRef<HTMLDivElement>(null)
 
   const clock = useMemo(() => new VideoClock({ fps: video.fps, frameCount: video.frameCount, startTimeS: video.startTimeS }), [video.fps, video.frameCount, video.startTimeS])
@@ -53,8 +63,10 @@ export function MatchViewer({ match, part, video }: MatchViewerProps) {
   const allActions = useMemo<BallAction[]>(() => analysis.data?.ballActions ?? [], [analysis.data])
   const visibleActions = useMemo(() => allActions.filter((a) => !a.isBackground), [allActions])
 
-  // Tracking arrives by time windows around the playhead (a full match is ~145k frames).
-  const tracking = useTrackingWindows(loadTracking, clock, video.durationS, video.frameCount, teams)
+  // Tracking arrives by time windows around the playhead (a full match is ~145k frames), and only while a
+  // layer drawn from it is on or a player is selected: by default a match opens with the video alone.
+  const trackingNeeded = needsTracking(state.layers, state.selectedTrackerId)
+  const tracking = useTrackingWindows(loadTracking, clock, video.durationS, video.frameCount, teams, trackingNeeded)
   const store = tracking.revision > 0 ? tracking.store : null
   const availability = useMemo(
     () => layerAvailability(analysis.data ?? null, store),
@@ -70,6 +82,7 @@ export function MatchViewer({ match, part, video }: MatchViewerProps) {
   }
 
   const seekToEvent = (event: MatchEvent) => clock.seek(event.seekS)
+  const seekToHighlight = (clip: HighlightClip) => clock.seek(clip.startS)
   const seekToAction = (action: BallAction) => {
     clock.seek(Math.max(0, action.timestampS - ACTION_PREROLL_S))
     if (action.trackerId !== null) dispatch({ type: 'selectTracker', trackerId: action.trackerId })
@@ -103,7 +116,7 @@ export function MatchViewer({ match, part, video }: MatchViewerProps) {
         >
           <OverlayCanvas
             clock={clock}
-            store={store}
+            store={tracking.store}
             teams={teams}
             actions={visibleActions}
             events={events}
@@ -135,6 +148,8 @@ export function MatchViewer({ match, part, video }: MatchViewerProps) {
           <Panel title="Players on screen">
             {tracking.status === 'error' ? (
               <ErrorState error={tracking.error} title="Tracking unavailable" onRetry={tracking.retry} />
+            ) : !trackingNeeded && store === null ? (
+              <EmptyState title="Tracking not loaded">Turn on a video layer (Players, Ball, Trails…) to load the tracking around the playhead.</EmptyState>
             ) : (
               <TrackletPanel
                 store={store}
@@ -152,7 +167,13 @@ export function MatchViewer({ match, part, video }: MatchViewerProps) {
           <Panel
             className={s.eventsPanel}
             flush
-            title={state.sidebarTab === 'events' ? `Play history · ${events.length}` : `Ball actions · ${visibleActions.length}`}
+            title={
+              state.sidebarTab === 'events'
+                ? `Play history · ${events.length}`
+                : state.sidebarTab === 'actions'
+                  ? `Ball actions · ${visibleActions.length}`
+                  : highlightsTitle
+            }
             actions={
               <div className={eventStyles.tabs} role="tablist" aria-label="Timeline content">
                 <button
@@ -173,21 +194,42 @@ export function MatchViewer({ match, part, video }: MatchViewerProps) {
                 >
                   Ball actions
                 </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={state.sidebarTab === 'highlights'}
+                  className={cx(eventStyles.tab, state.sidebarTab === 'highlights' && eventStyles.active)}
+                  onClick={() => dispatch({ type: 'setTab', tab: 'highlights' })}
+                >
+                  Highlights
+                </button>
               </div>
             }
           >
-            {analysis.status === 'loading' && (
-              <div style={{ padding: 24, textAlign: 'center' }}>
-                <Spinner label="Loading analysis" />
-              </div>
+            {state.sidebarTab === 'highlights' ? (
+              <HighlightsPanel
+                matchId={match.id}
+                partId={part.id}
+                analysisCompleted={part.status === 'completed'}
+                onSeek={seekToHighlight}
+                onStatus={setHighlightsLive}
+              />
+            ) : (
+              <>
+                {analysis.status === 'loading' && (
+                  <div style={{ padding: 24, textAlign: 'center' }}>
+                    <Spinner label="Loading analysis" />
+                  </div>
+                )}
+                {analysis.status === 'error' && <ErrorState error={analysis.error} title="Analysis unavailable" onRetry={analysis.reload} />}
+                {analysis.status === 'success' &&
+                  (state.sidebarTab === 'events' ? (
+                    <EventList events={events} clock={clock} onSelect={seekToEvent} showConfidence={settings.showConfidence} />
+                  ) : (
+                    <BallActionList actions={allActions} teams={teams} clock={clock} onSelect={seekToAction} showConfidence={settings.showConfidence} />
+                  ))}
+              </>
             )}
-            {analysis.status === 'error' && <ErrorState error={analysis.error} title="Analysis unavailable" onRetry={analysis.reload} />}
-            {analysis.status === 'success' &&
-              (state.sidebarTab === 'events' ? (
-                <EventList events={events} clock={clock} onSelect={seekToEvent} showConfidence={settings.showConfidence} />
-              ) : (
-                <BallActionList actions={allActions} teams={teams} clock={clock} onSelect={seekToAction} showConfidence={settings.showConfidence} />
-              ))}
           </Panel>
         </div>
       </div>

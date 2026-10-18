@@ -38,6 +38,8 @@ export function useTrackingWindows(
   durationS: number,
   frameCount: number,
   teams: TeamAssignments,
+  /** False while nothing on screen needs tracking: no requests are made (what is loaded stays). */
+  enabled = true,
 ): TrackingWindows {
   const [store] = useState(() => new TrackingStore([], { frameCount, teams }))
   const [revision, setRevision] = useState(0)
@@ -56,6 +58,11 @@ export function useTrackingWindows(
   useEffect(() => {
     let cancelled = false
     const chunks = chunksRef.current
+    if (!enabled) {
+      // A full match of tracking is hundreds of MB: only fetch while a layer (or a selected player) uses it.
+      setStatus([...chunks.values()].some((c) => c.state === 'done') ? 'ready' : 'idle')
+      return
+    }
     for (const [k, c] of chunks) if (c.state === 'error') chunks.delete(k)
 
     const ensure = (chunk: number) => {
@@ -95,7 +102,7 @@ export function useTrackingWindows(
       // remount (StrictMode, or a changed `load`) asks for those chunks again.
       for (const [k, c] of chunks) if (c.state === 'loading') chunks.delete(k)
     }
-  }, [load, clock, durationS, totalChunks, store, attempt])
+  }, [load, clock, durationS, totalChunks, store, attempt, enabled])
 
   return {
     store,

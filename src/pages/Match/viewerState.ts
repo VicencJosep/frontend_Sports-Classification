@@ -1,6 +1,6 @@
 import { DEFAULT_LAYERS, type LayerId, type LayerState } from '@/components/layers/layers'
 
-export type SidebarTab = 'events' | 'actions'
+export type SidebarTab = 'events' | 'actions' | 'highlights'
 
 export interface ViewerState {
   layers: LayerState

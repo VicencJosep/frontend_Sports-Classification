@@ -1,17 +1,19 @@
 import {
   toMatch,
   toMatchAnalysis,
+  toPartHighlights,
   toTrackingFrames,
   type ApiErrorBody,
+  type ApiHighlightsResponse,
   type ApiMatch,
   type ApiMatchCreate,
   type ApiPartAnalysis,
   type ApiTrackingWindow,
   type ApiVideo,
 } from '@/adapters/api'
-import type { CreateMatchInput, Match, MatchAnalysis, TrackingFrame } from '@/domain'
+import type { CreateMatchInput, Match, MatchAnalysis, PartHighlights, TrackingFrame } from '@/domain'
 
-import { ServiceError, type MatchService, type ServiceErrorCode, type TrackingRange } from '../MatchService'
+import { ServiceError, type MatchService, type ServiceErrorCode, type StartAnalysisOptions, type TrackingRange } from '../MatchService'
 
 export interface ApiMatchServiceOptions {
   /** Origin of the FastAPI backend, e.g. `http://localhost:8100`. */
@@ -66,12 +68,28 @@ export class ApiMatchService implements MatchService {
       parts,
     }
     const created = await this.request<ApiMatch>('/api/matches', { method: 'POST', body: JSON.stringify(body) })
-    return this.startAnalysis(created.id)
+    return this.startAnalysis(created.id, { highlights: input.autoHighlights })
   }
 
-  async startAnalysis(matchId: string): Promise<Match> {
-    await this.request(`/api/matches/${encodeURIComponent(matchId)}/analysis`, { method: 'POST', body: JSON.stringify({ mode: 'full-match' }) })
+  async startAnalysis(matchId: string, options?: StartAnalysisOptions): Promise<Match> {
+    await this.request(`/api/matches/${encodeURIComponent(matchId)}/analysis`, {
+      method: 'POST',
+      body: JSON.stringify({ mode: 'full-match', highlights: options?.highlights ?? false }),
+    })
     return this.getMatch(matchId)
+  }
+
+  async getPartHighlights(matchId: string, partId: string): Promise<PartHighlights> {
+    const response = await this.getJson<ApiHighlightsResponse>(partPath(matchId, partId, 'highlights'))
+    return toPartHighlights(response, this.baseUrl)
+  }
+
+  async generateHighlights(matchId: string, partId: string, force = false): Promise<PartHighlights> {
+    const response = await this.request<ApiHighlightsResponse>(partPath(matchId, partId, 'highlights'), {
+      method: 'POST',
+      body: JSON.stringify({ force }),
+    })
+    return toPartHighlights(response, this.baseUrl)
   }
 
   async getPartAnalysis(matchId: string, partId: string): Promise<MatchAnalysis> {
@@ -109,6 +127,10 @@ export class ApiMatchService implements MatchService {
     if (!response.ok) throw await errorFromResponse(response)
     return (await response.json()) as T
   }
+}
+
+function partPath(matchId: string, partId: string, resource: string): string {
+  return `/api/matches/${encodeURIComponent(matchId)}/parts/${encodeURIComponent(partId)}/${resource}`
 }
 
 function codeForStatus(status: number): ServiceErrorCode {

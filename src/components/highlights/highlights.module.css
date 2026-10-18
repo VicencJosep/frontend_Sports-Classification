@@ -1,0 +1,144 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px;
+  text-align: center;
+}
+
+.statusText {
+  font-size: var(--fs-sm, 13px);
+  color: var(--text-muted, #8a8f98);
+  line-height: 1.5;
+  max-width: 36ch;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border, rgba(127, 127, 127, 0.25));
+  font-size: var(--fs-sm, 13px);
+  color: var(--text-muted, #8a8f98);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  border-bottom: 1px solid var(--border, rgba(127, 127, 127, 0.18));
+}
+
+.item:last-child {
+  border-bottom: 0;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+}
+
+.seek {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 4px 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.seek:hover .title {
+  text-decoration: underline;
+}
+
+.time {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: var(--fs-sm, 13px);
+  color: var(--text-muted, #8a8f98);
+  flex: 0 0 auto;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sub {
+  font-size: var(--fs-sm, 13px);
+  color: var(--text-muted, #8a8f98);
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+
+.download {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border, rgba(127, 127, 127, 0.35));
+  font-size: var(--fs-sm, 13px);
+  color: inherit;
+  text-decoration: none;
+}
+
+.download:hover {
+  background: var(--surface-hover, rgba(127, 127, 127, 0.12));
+}
+
+.desc {
+  margin: 0;
+  padding: 0 12px 8px 12px;
+  font-size: var(--fs-sm, 13px);
+  color: var(--text-muted, #8a8f98);
+  line-height: 1.45;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  max-height: 320px;
+  background: #000;
+}
+
+.error {
+  margin: 0;
+  padding: 8px 12px;
+  font-size: var(--fs-sm, 13px);
+  color: var(--danger, #e5484d);
+}

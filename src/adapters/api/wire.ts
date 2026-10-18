@@ -23,6 +23,13 @@ export interface ApiVideo {
   content_url: string
 }
 
+export interface ApiHighlightsSummary {
+  status: string
+  stage: string | null
+  n_clips: number
+  error: string | null
+}
+
 export interface ApiMatchPart {
   id: string
   kind: string
@@ -32,6 +39,38 @@ export interface ApiMatchPart {
   stage: string | null
   error: string | null
   video: ApiVideo | null
+  highlights?: ApiHighlightsSummary | null
+}
+
+export interface ApiHighlightClip {
+  id: string
+  rank: number
+  label: string
+  title: string
+  description: string
+  start_s: number
+  end_s: number
+  duration_s: number
+  anchor_s: number
+  team_cluster: number | null
+  final_score: number
+  vlm_rank: number | null
+  /** Relative to the API base URL, null when the clip was not cut. */
+  content_url: string | null
+}
+
+export interface ApiHighlightsResponse {
+  match_id: string
+  part_id: string
+  status: string
+  stage: string | null
+  error: string | null
+  started_at: string | null
+  finished_at: string | null
+  generated_at: string | null
+  vlm_model: string | null
+  n_candidates: number
+  clips: ApiHighlightClip[]
 }
 
 export interface ApiMatch {

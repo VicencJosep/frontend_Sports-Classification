@@ -86,7 +86,7 @@ export function VideoStage({ video, clock, children, note, badges, muted, onTogg
 
   return (
     <div className={s.stage} tabIndex={0} onKeyDown={onKeyDown} aria-label="Match video" role="region">
-      <video ref={videoRef} className={s.video} src={video.url} preload="auto" playsInline muted={muted} />
+      <video ref={videoRef} className={s.video} src={video.url} preload="metadata" playsInline muted={muted} />
       {children}
       <div className={s.clickLayer} onClick={() => clock.toggle()} onDoubleClick={onToggleFullscreen} aria-hidden="true" />
       {!playing && (

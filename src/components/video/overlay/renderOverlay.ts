@@ -47,6 +47,7 @@ export function renderOverlay(ctx: CanvasRenderingContext2D, scene: OverlayScene
 
   const frame = scene.store.getFrameOrPrevious(scene.frameIdx)
   if (!frame) {
+    drawCards(ctx, scene)
     ctx.restore()
     return
   }
@@ -126,27 +127,8 @@ export function renderOverlay(ctx: CanvasRenderingContext2D, scene: OverlayScene
     }
   }
 
-  // 6. Notification cards (top-left, like the pipeline's final video): current event, then latest ball action.
-  if (scene.layers.cards) {
-    const k = clamp(width / 1100, 0.7, 1.4)
-    const cardW = Math.round(clamp(width * 0.26, 190, 320))
-    const cardH = Math.round(58 * k)
-    const margin = Math.round(14 * k)
-    let y = margin
-    const timeS = scene.frameIdx / scene.fps
-    const event = activeEvent(scene.events, timeS)
-    if (event) {
-      drawCard(ctx, margin, y, cardW, cardH, k, labelDisplayName(event.label).toUpperCase(), `${Math.round(event.peakConfidence * 100)}% confidence`, eventColor(event.label), 1)
-      y += cardH + Math.round(8 * k)
-    }
-    const windowFrames = Math.round(scene.settings.actionBadgeSeconds * scene.fps)
-    const latest = recentActions(scene.actions, frame.frameIdx, windowFrames)[0]
-    if (latest) {
-      const age = frame.frameIdx - latest.frameIdx
-      const alpha = clamp(1.2 - age / Math.max(1, windowFrames), 0.3, 1)
-      drawCard(ctx, margin, y, cardW, cardH, k, labelDisplayName(latest.label).toUpperCase(), actionSubtitle(latest, scene.teams), ballActionColor(latest.label), alpha)
-    }
-  }
+  // 6. Notification cards.
+  drawCards(ctx, scene)
 
   ctx.restore()
 }
@@ -350,4 +332,29 @@ export function recentActions(actions: readonly BallAction[], frameIdx: number, 
     out.push(a)
   }
   return out
+}
+
+/** Notification cards (top-left, like the pipeline's final video): current event, then latest ball action.
+ * Drawn from the event/action lists only, so they work before any tracking is loaded. */
+function drawCards(ctx: CanvasRenderingContext2D, scene: OverlayScene): void {
+  if (!scene.layers.cards) return
+  const { width } = scene
+  const k = clamp(width / 1100, 0.7, 1.4)
+  const cardW = Math.round(clamp(width * 0.26, 190, 320))
+  const cardH = Math.round(58 * k)
+  const margin = Math.round(14 * k)
+  let y = margin
+  const timeS = scene.frameIdx / scene.fps
+  const event = activeEvent(scene.events, timeS)
+  if (event) {
+    drawCard(ctx, margin, y, cardW, cardH, k, labelDisplayName(event.label).toUpperCase(), `${Math.round(event.peakConfidence * 100)}% confidence`, eventColor(event.label), 1)
+    y += cardH + Math.round(8 * k)
+  }
+  const windowFrames = Math.round(scene.settings.actionBadgeSeconds * scene.fps)
+  const latest = recentActions(scene.actions, scene.frameIdx, windowFrames)[0]
+  if (latest) {
+    const age = scene.frameIdx - latest.frameIdx
+    const alpha = clamp(1.2 - age / Math.max(1, windowFrames), 0.3, 1)
+    drawCard(ctx, margin, y, cardW, cardH, k, labelDisplayName(latest.label).toUpperCase(), actionSubtitle(latest, scene.teams), ballActionColor(latest.label), alpha)
+  }
 }

@@ -81,6 +81,7 @@ export function manifestToPart(baseUrl: string, matchId: string, part: MockPartM
     mode: part.mode,
     status: isAnalysisStatus(part.status) ? part.status : 'pending',
     stage: null,
+    highlights: null,
     video: part.video ? manifestToVideoInfo(baseUrl, matchId, part.video) : null,
   }
 }

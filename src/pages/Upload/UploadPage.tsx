@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 
 import { useMatchService } from '@/app/providers/useServices'
 import { Page } from '@/app/shell/Page'
-import { Badge, Button, Card, Field, Panel, TextInput } from '@/components/common'
+import { Badge, Button, Card, Field, Panel, TextInput, Toggle } from '@/components/common'
 import type { CreateMatchPartInput } from '@/domain'
 import { errorMessage } from '@/hooks/useAsync'
 import { resolveDataSource } from '@/services'
@@ -25,6 +25,7 @@ export function UploadPage() {
   const [homeTeam, setHomeTeam] = useState('')
   const [awayTeam, setAwayTeam] = useState('')
   const [date, setDate] = useState('')
+  const [autoHighlights, setAutoHighlights] = useState(true)
   const [progress, setProgress] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -53,6 +54,7 @@ export function UploadPage() {
           awayTeam: awayTeam.trim() || null,
           date: date || null,
           parts,
+          autoHighlights,
         },
         setProgress,
       )
@@ -117,6 +119,15 @@ export function UploadPage() {
               <Field label="Date" htmlFor="date" hint="Optional.">
                 <TextInput id="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} disabled={submitting} />
               </Field>
+              <div className={s.full}>
+                <Toggle
+                  checked={autoHighlights}
+                  onChange={setAutoHighlights}
+                  disabled={submitting}
+                  label="Generate highlights automatically"
+                  hint="When the analysis finishes, the best plays (goals, chances, runs) are selected and cut into clips. You can also do it later from the match page."
+                />
+              </div>
             </div>
 
             {progress !== null && (
@@ -167,6 +178,11 @@ export function UploadPage() {
               <li>
                 <span>
                   <strong>Events and ball actions.</strong> Shots, goals, fouls, cards, corners and per-player passes, drives and headers are detected with their timestamps.
+                </span>
+              </li>
+              <li>
+                <span>
+                  <strong>Highlights.</strong> Optionally, the best plays are picked (detector signals, crowd noise and a vision-language model) and cut into clips.
                 </span>
               </li>
               <li>

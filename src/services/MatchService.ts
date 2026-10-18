@@ -1,8 +1,13 @@
-import type { CreateMatchInput, Match, MatchAnalysis, TrackingFrame } from '@/domain'
+import type { CreateMatchInput, Match, MatchAnalysis, PartHighlights, TrackingFrame } from '@/domain'
 
 export interface TrackingRange {
   fromS: number
   toS: number
+}
+
+export interface StartAnalysisOptions {
+  /** Chain the best-plays generation after the analysis of each part. */
+  highlights?: boolean
 }
 
 /**
@@ -16,11 +21,15 @@ export interface MatchService {
   /** Registers a new match from uploaded video(s) and starts its analysis. `onProgress` receives 0..1. */
   createMatch(input: CreateMatchInput, onProgress?: (fraction: number) => void): Promise<Match>
   /** (Re)starts the analysis of every part that is not completed; the GPU is shared, so retries are routine. */
-  startAnalysis(matchId: string): Promise<Match>
+  startAnalysis(matchId: string, options?: StartAnalysisOptions): Promise<Match>
   /** Events, ball actions and team clusters of one part (small). */
   getPartAnalysis(matchId: string, partId: string): Promise<MatchAnalysis>
   /** Per-frame tracking of one part (large). `range` lets a backend serve a window; the mock returns everything. */
   getPartTracking(matchId: string, partId: string, range?: TrackingRange): Promise<TrackingFrame[]>
+  /** Best plays of one analysed part: generation status and, once completed, the clips. Rejects with `not-found` if never generated. */
+  getPartHighlights(matchId: string, partId: string): Promise<PartHighlights>
+  /** Queues the best-plays generation of an analysed part (`force` ignores the cached signals and model verdicts). */
+  generateHighlights(matchId: string, partId: string, force?: boolean): Promise<PartHighlights>
 }
 
 export type ServiceErrorCode = 'not-found' | 'unavailable' | 'invalid-data' | 'not-implemented'

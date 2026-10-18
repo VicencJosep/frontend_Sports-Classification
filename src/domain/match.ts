@@ -1,3 +1,4 @@
+import type { HighlightsSummary } from './highlights'
 import type { AnalysisMode, AnalysisStatus, PartKind } from './vocab'
 
 /**
@@ -28,6 +29,8 @@ export interface MatchPart {
   stage: string | null
   /** null while the part is not analysed yet or its video is unavailable. */
   video: VideoInfo | null
+  /** Best-plays generation of this part; null when it was never requested. */
+  highlights: HighlightsSummary | null
 }
 
 export interface Score {
@@ -71,6 +74,8 @@ export interface CreateMatchInput {
   awayTeam: string | null
   date: string | null
   parts: CreateMatchPartInput[]
+  /** Generate the best plays of every part as soon as its analysis completes. */
+  autoHighlights: boolean
 }
 
 export function matchDurationS(parts: readonly MatchPart[]): number | null {
