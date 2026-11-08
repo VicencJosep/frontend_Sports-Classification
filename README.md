@@ -46,11 +46,13 @@ src/
 │   ├── video/      VideoStage, OverlayCanvas, PlayerControls, Timeline, overlay/renderOverlay.ts (pure canvas drawing)
 │   ├── layers/     layer definitions + availability, LayerPanel
 │   ├── events/     EventList, BallActionList, badges
+│   ├── clips/      ClipEditor, TrimStrip + Filmstrip (trim bar), SavedClipsPanel, playerCandidates
 │   └── players/    TrackletPanel
-├── domain/         vocabularies (string unions), Match/MatchPart, TrackingFrame, events, teams, display mappings
+├── domain/         vocabularies (string unions), Match/MatchPart, TrackingFrame, events, teams, clips, display mappings
 ├── adapters/python raw.ts (Python JSON shapes), guards.ts, tracks.ts, teams.ts, telemetry.ts, real-data tests
 ├── services/       MatchService.ts (interface), createMatchService.ts (factory by VITE_DATA_SOURCE), mock/
-├── lib/            VideoClock (external store synced to the <video>), TrackingStore (frame-indexed data + trails)
+├── lib/            VideoClock (external store synced to the <video>), TrackingStore (frame-indexed data + trails),
+│                   RangePlayback (play a range, stop on its last frame), clipStore (saved clips in localStorage)
 ├── hooks/          useAsync, useVideoClock (useSyncExternalStore selectors)
 ├── utils/          time formatting, cx
 └── styles/         tokens.css (dark theme, green accent), global.css
@@ -93,6 +95,18 @@ disabled when the part has no data for it (for example teams when the analysis r
 card, substitution) with filters; clicking a row (or a marker on the timeline) seeks the video to that moment.
 Goals, shots and penalties get bigger markers. The Ball actions tab lists every pass / drive / header / high pass /
 throw-in attributed to a player.
+
+**Clip editor and saved clips**: any detected event can be turned into a clip. Clicking the event card drawn
+top-left on the video (or the ✂ button under the player, or the ✂ on a play-history row) pauses the video and opens
+the editor between the video and the controls: a filmstrip trim bar (`components/clips/TrimStrip.tsx`) with two
+handles for the start and the end (drag the middle to move the whole clip; arrows nudge one frame, shift one second;
+`I` / `O` copy the playhead; the main player follows the handle so the exact frame is visible), the detected event as
+an anchor, the other events as ticks and zoom controls. The form corrects the **event type** (shot → goal…), the
+**player** (tracklets seen in the clip from the loaded tracking, the pipeline's possessor marked "had the ball", or a
+typed name) and the title; *Preview* plays the range in the viewer and stops on its last frame. Saved clips appear in
+the **Saved clips** tab next to Highlights: play, edit, delete with undo and export as JSON. They are frontend-owned
+(`domain/clips.ts`, `lib/clipStore.ts` over `localStorage`, `hooks/useSavedClips.ts`); the backend has no clip
+endpoint yet, so cutting an MP4 of a saved clip (the `analytics/highlights/cut.py` route) is the natural next step.
 
 Branding follows [ugiat.com](https://ugiat.com): logo in `public/brand/`, cyan `#00aeef` accent, the brand
 gradient, Montserrat for headings and Roboto for text (Google Fonts).

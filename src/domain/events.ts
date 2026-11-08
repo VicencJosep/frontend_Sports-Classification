@@ -52,6 +52,18 @@ export function eventActiveAt(event: MatchEvent, timeS: number): boolean {
   return timeS >= event.startS && timeS <= event.endS
 }
 
+/** The event whose span contains `timeS` (events sorted by startS); with overlapping spans, the one that started last. */
+export function activeEventAt(events: readonly MatchEvent[], timeS: number): MatchEvent | null {
+  for (let i = lastEventIndexAt(events, timeS); i >= 0; i -= 1) {
+    const e = events[i]
+    if (e === undefined) break
+    if (timeS <= e.endS) return e
+    // An earlier span can still contain timeS if it is longer, so keep walking a little.
+    if (e.startS < timeS - 60) break
+  }
+  return null
+}
+
 /** Index of the last event whose span start is <= timeS (events sorted by startS), or -1. */
 export function lastEventIndexAt(events: readonly MatchEvent[], timeS: number): number {
   let lo = 0

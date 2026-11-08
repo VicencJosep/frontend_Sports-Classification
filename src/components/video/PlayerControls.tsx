@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
-import { Button, IconFullscreen, IconPause, IconPlay, IconStepBack, IconStepForward, Select } from '@/components/common'
-import type { MatchEvent } from '@/domain'
+import { Button, IconFullscreen, IconPause, IconPlay, IconScissors, IconStepBack, IconStepForward, Select } from '@/components/common'
+import type { MatchEvent, SavedClip } from '@/domain'
 import { useClockSnapshot } from '@/hooks/useVideoClock'
 import type { VideoClock } from '@/lib/videoClock'
 import { formatClock, formatClockTenths } from '@/utils/time'
@@ -19,15 +19,20 @@ interface PlayerControlsProps {
   onSelectEvent?: (event: MatchEvent) => void
   /** Quick layer toggles rendered in the controls row. */
   layerBar?: ReactNode
+  /** Saved clips and the range under edition, for the timeline. */
+  clips?: readonly SavedClip[]
+  editingRange?: { startS: number; endS: number } | null
+  /** Opens the clip editor at the playhead (nearest event, or a plain play). */
+  onCreateClip?: () => void
 }
 
 const RATES = [0.25, 0.5, 1, 1.5, 2]
 
-export function PlayerControls({ clock, durationS, events, muted, onToggleMute, onFullscreen, onSelectEvent, layerBar }: PlayerControlsProps) {
+export function PlayerControls({ clock, durationS, events, muted, onToggleMute, onFullscreen, onSelectEvent, layerBar, clips, editingRange, onCreateClip }: PlayerControlsProps) {
   const snap = useClockSnapshot(clock)
   return (
     <div className={s.controls}>
-      <Timeline clock={clock} durationS={durationS} events={events} onSelectEvent={onSelectEvent} />
+      <Timeline clock={clock} durationS={durationS} events={events} onSelectEvent={onSelectEvent} clips={clips} range={editingRange} />
       <div className={s.controlsRow}>
         <Button iconOnly size="sm" variant="ghost" onClick={() => clock.stepFrames(-1)} aria-label="Previous frame" title="Previous frame (,)">
           <IconStepBack size={16} />
@@ -45,6 +50,12 @@ export function PlayerControls({ clock, durationS, events, muted, onToggleMute, 
         <span className={s.frame} title="Pipeline frame index">
           frame {snap.frameIdx}
         </span>
+        {onCreateClip && (
+          <Button size="sm" variant={editingRange ? 'secondary' : 'ghost'} className={s.clipButton} onClick={onCreateClip} aria-pressed={editingRange !== null && editingRange !== undefined} title="Cut a clip here: the event at the playhead, or a plain play">
+            <IconScissors size={14} />
+            Clip
+          </Button>
+        )}
         <span className={s.spacer} />
         {layerBar}
         <span className={s.spacer} />

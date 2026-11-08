@@ -122,3 +122,77 @@ export const IconInfo = (p: IconProps) => (
     <circle cx="12" cy="8" r="0.6" fill="currentColor" />
   </svg>
 )
+
+export const IconScissors = (p: IconProps) => (
+  <svg {...base(p)}>
+    <circle cx="6" cy="6" r="2.6" />
+    <circle cx="6" cy="18" r="2.6" />
+    <path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1l3.4 3.4" />
+  </svg>
+)
+
+export const IconTrash = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M4 7h16M10 11v6M14 11v6" />
+    <path d="M6 7l1 13h10l1-13" />
+    <path d="M9 7V4h6v3" />
+  </svg>
+)
+
+export const IconPencil = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0-3-3L5 17z" />
+    <path d="M13.5 6.5l3 3" />
+  </svg>
+)
+
+export const IconDownload = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M12 4v12M6.5 10.5 12 16l5.5-5.5" />
+    <path d="M4 17v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-2" />
+  </svg>
+)
+
+export const IconZoomIn = (p: IconProps) => (
+  <svg {...base(p)}>
+    <circle cx="11" cy="11" r="6.5" />
+    <path d="m20 20-4.2-4.2M11 8.5v5M8.5 11h5" />
+  </svg>
+)
+
+export const IconZoomOut = (p: IconProps) => (
+  <svg {...base(p)}>
+    <circle cx="11" cy="11" r="6.5" />
+    <path d="m20 20-4.2-4.2M8.5 11h5" />
+  </svg>
+)
+
+export const IconLoop = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M17 2.5 20 5.5l-3 3" />
+    <path d="M4 11V9.5a4 4 0 0 1 4-4h12" />
+    <path d="M7 21.5 4 18.5l3-3" />
+    <path d="M20 13v1.5a4 4 0 0 1-4 4H4" />
+  </svg>
+)
+
+export const IconStop = (p: IconProps) => (
+  <svg {...base({ ...p, fill: 'currentColor', stroke: 'none' })}>
+    <rect x="5.5" y="5.5" width="13" height="13" rx="2" />
+  </svg>
+)
+
+export const IconCheck = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="m5 12.5 4.5 4.5L19 7" />
+  </svg>
+)
+
+/** Playhead marker: used by "set the start / end at the playhead". */
+export const IconPlayhead = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M12 9v11" />
+    <path d="M7 4h10l-5 5z" fill="currentColor" stroke="none" />
+    <path d="M5 20h14" />
+  </svg>
+)

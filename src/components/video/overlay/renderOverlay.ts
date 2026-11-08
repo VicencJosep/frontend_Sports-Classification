@@ -1,7 +1,7 @@
 import type { ViewerSettings } from '@/app/providers/settings'
 import type { LayerState } from '@/components/layers/layers'
 import type { BallAction, MatchEvent, PersonDetection, TeamAssignments, TrackingFrame } from '@/domain'
-import { BALL_COLOR, POSSESSION_COLOR, ROLE_SHORT, SELECTION_COLOR, TEAM_NEUTRAL_COLOR, ballActionColor, eventColor, labelDisplayName, lastEventIndexAt, teamOf } from '@/domain'
+import { BALL_COLOR, POSSESSION_COLOR, ROLE_SHORT, SELECTION_COLOR, TEAM_NEUTRAL_COLOR, activeEventAt, ballActionColor, eventColor, labelDisplayName, teamOf } from '@/domain'
 import type { TrackingStore } from '@/lib/trackingStore'
 
 import { clamp, toCanvas, trackerColor, type Transform } from './geometry'
@@ -133,16 +133,25 @@ export function renderOverlay(ctx: CanvasRenderingContext2D, scene: OverlayScene
   ctx.restore()
 }
 
-/** The event whose span contains `timeS`; with overlapping spans, the one that started last. */
-function activeEvent(events: readonly MatchEvent[], timeS: number): MatchEvent | null {
-  for (let i = lastEventIndexAt(events, timeS); i >= 0; i -= 1) {
-    const e = events[i]
-    if (e === undefined) break
-    if (timeS <= e.endS) return e
-    // Spans are sorted by start; an earlier one can still contain timeS if it is longer, so keep walking a little.
-    if (e.startS < timeS - 60) break
+/** Geometry of the notification cards for a canvas `width` CSS px wide (shared with the clickable card layer). */
+export interface CardLayout {
+  /** Scale factor of fonts and paddings. */
+  k: number
+  margin: number
+  cardW: number
+  cardH: number
+  gap: number
+}
+
+export function cardLayout(width: number): CardLayout {
+  const k = clamp(width / 1100, 0.7, 1.4)
+  return {
+    k,
+    margin: Math.round(14 * k),
+    cardW: Math.round(clamp(width * 0.26, 190, 320)),
+    cardH: Math.round(58 * k),
+    gap: Math.round(8 * k),
   }
-  return null
 }
 
 /** "#1907 · jersey 9 · Team A · 77%": who did the action, as far as the pipeline knows. */
@@ -338,17 +347,13 @@ export function recentActions(actions: readonly BallAction[], frameIdx: number, 
  * Drawn from the event/action lists only, so they work before any tracking is loaded. */
 function drawCards(ctx: CanvasRenderingContext2D, scene: OverlayScene): void {
   if (!scene.layers.cards) return
-  const { width } = scene
-  const k = clamp(width / 1100, 0.7, 1.4)
-  const cardW = Math.round(clamp(width * 0.26, 190, 320))
-  const cardH = Math.round(58 * k)
-  const margin = Math.round(14 * k)
+  const { k, margin, cardW, cardH, gap } = cardLayout(scene.width)
   let y = margin
   const timeS = scene.frameIdx / scene.fps
-  const event = activeEvent(scene.events, timeS)
+  const event = activeEventAt(scene.events, timeS)
   if (event) {
     drawCard(ctx, margin, y, cardW, cardH, k, labelDisplayName(event.label).toUpperCase(), `${Math.round(event.peakConfidence * 100)}% confidence`, eventColor(event.label), 1)
-    y += cardH + Math.round(8 * k)
+    y += cardH + gap
   }
   const windowFrames = Math.round(scene.settings.actionBadgeSeconds * scene.fps)
   const latest = recentActions(scene.actions, scene.frameIdx, windowFrames)[0]

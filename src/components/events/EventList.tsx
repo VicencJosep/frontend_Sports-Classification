@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-import { EmptyState } from '@/components/common'
+import { Button, EmptyState, IconScissors } from '@/components/common'
 import type { MatchEvent } from '@/domain'
 import type { VideoClock } from '@/lib/videoClock'
 import { cx } from '@/utils/cx'
@@ -16,6 +16,8 @@ interface EventListProps {
   clock: VideoClock
   onSelect: (event: MatchEvent) => void
   showConfidence: boolean
+  /** Shows a scissors button on each row that opens the clip editor for that event. */
+  onCreateClip?: (event: MatchEvent) => void
 }
 
 type EventFilter = 'all' | 'attack' | 'set-pieces' | 'discipline' | 'other'
@@ -42,7 +44,7 @@ function matches(filter: EventFilter, label: string): boolean {
  * Play history: chronological event timeline with filters. Clicking a row seeks
  * the video to the event; the rows whose span contains the playhead are highlighted.
  */
-export function EventList({ events, clock, onSelect, showConfidence }: EventListProps) {
+export function EventList({ events, clock, onSelect, showConfidence, onCreateClip }: EventListProps) {
   const [filter, setFilter] = useState<EventFilter>('all')
   const visible = useMemo(() => events.filter((e) => matches(filter, e.label)), [events, filter])
   const activeKey = useActiveEventKey(clock, visible)
@@ -86,14 +88,14 @@ export function EventList({ events, clock, onSelect, showConfidence }: EventList
             const spanS = Math.max(0, event.endS - event.startS)
             const highlight = event.label === 'goal' || event.label === 'shot' || event.label === 'penalty'
             return (
-              <li key={event.id}>
+              <li key={event.id} className={s.rowWrap}>
                 <button
                   type="button"
                   ref={(el) => {
                     if (el) rows.current.set(event.id, el)
                     else rows.current.delete(event.id)
                   }}
-                  className={cx(s.row, active && s.active, highlight && s.highlight)}
+                  className={cx(s.row, active && s.active, highlight && s.highlight, onCreateClip && s.rowWithAction)}
                   onClick={() => onSelect(event)}
                   aria-current={active ? 'true' : undefined}
                   title={`Go to ${formatClock(event.seekS)}`}
@@ -108,6 +110,11 @@ export function EventList({ events, clock, onSelect, showConfidence }: EventList
                   </span>
                   <span className={s.right}>{showConfidence && <span title="Peak confidence">{formatPercent(event.peakConfidence)}</span>}</span>
                 </button>
+                {onCreateClip && (
+                  <Button iconOnly size="sm" variant="ghost" className={s.rowAction} onClick={() => onCreateClip(event)} aria-label={`Cut a clip from this ${event.label}`} title="Cut a clip from this event">
+                    <IconScissors size={14} />
+                  </Button>
+                )}
               </li>
             )
           })}

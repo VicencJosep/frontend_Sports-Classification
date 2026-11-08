@@ -1,6 +1,6 @@
 import { useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react'
 
-import type { MatchEvent } from '@/domain'
+import type { MatchEvent, SavedClip } from '@/domain'
 import { eventColor, labelDisplayName } from '@/domain'
 import { useClockTime } from '@/hooks/useVideoClock'
 import { cx } from '@/utils/cx'
@@ -14,6 +14,10 @@ interface TimelineProps {
   durationS: number
   events: readonly MatchEvent[]
   onSelectEvent?: (event: MatchEvent) => void
+  /** Clips the user saved: drawn as outlined bands under the bar. */
+  clips?: readonly SavedClip[]
+  /** Range being edited in the clip editor: highlighted on the bar. */
+  range?: { startS: number; endS: number } | null
 }
 
 const GOAL_SOURCE_TEXT: Readonly<Record<string, string>> = {
@@ -32,7 +36,7 @@ function goalText(event: MatchEvent): string {
  * Seekable progress bar with event markers (dot at the seek point, thin bar for the span).
  * Goals get a flag above the bar with the score; unconfirmed ones are drawn dashed.
  */
-export function Timeline({ clock, durationS, events, onSelectEvent }: TimelineProps) {
+export function Timeline({ clock, durationS, events, onSelectEvent, clips = [], range = null }: TimelineProps) {
   const timeS = useClockTime(clock)
   const trackRef = useRef<HTMLDivElement>(null)
   const [hover, setHover] = useState<number | null>(null)
@@ -90,6 +94,16 @@ export function Timeline({ clock, durationS, events, onSelectEvent }: TimelinePr
     >
       <div ref={trackRef} className={s.track}>
         <div className={s.progress} style={{ width: pct(timeS) }} />
+        {range && <div className={s.rangeOverlay} style={{ left: pct(range.startS), width: `calc(${pct(range.endS)} - ${pct(range.startS)})` }} aria-hidden="true" />}
+        {clips.map((clip) => (
+          <span
+            key={clip.id}
+            className={s.clipBand}
+            style={{ left: pct(clip.startS), width: `calc(${pct(clip.endS)} - ${pct(clip.startS)})`, '--marker-color': eventColor(clip.label) } as CSSProperties}
+            title={`Saved clip · ${clip.title}`}
+            aria-hidden="true"
+          />
+        ))}
         {events.map((event) => (
           <span
             key={`${event.id}-span`}

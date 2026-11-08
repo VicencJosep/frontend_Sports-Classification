@@ -186,3 +186,36 @@
   color: var(--text-faint);
   white-space: nowrap;
 }
+
+/* Row with a hover action (clip scissors) on the right. */
+.rowWrap {
+  position: relative;
+}
+
+.row.rowWithAction {
+  padding-right: 44px;
+}
+
+.rowAction {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 100ms ease;
+}
+
+.rowWrap:hover .rowAction,
+.rowWrap:focus-within .rowAction {
+  opacity: 1;
+}
+
+.tabCount {
+  margin-left: 5px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}

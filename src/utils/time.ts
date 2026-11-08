@@ -39,3 +39,19 @@ export function formatDate(isoDate: string | null): string {
 export function formatPercent(fraction: number): string {
   return `${Math.round(fraction * 100)}%`
 }
+
+/**
+ * Parses what a user types in a time field: "75", "1:15", "01:15.4", "1:02:05", "75.5s".
+ * Returns seconds, or null when the text is not a time.
+ */
+export function parseClock(text: string): number | null {
+  const cleaned = text.trim().replace(/s$/i, '')
+  if (cleaned === '') return null
+  const parts = cleaned.split(':')
+  if (parts.length > 3 || parts.some((p) => p === '' || !/^\d+(\.\d+)?$/.test(p))) return null
+  const numbers = parts.map(Number)
+  if (numbers.some((n) => !Number.isFinite(n))) return null
+  let seconds = 0
+  for (const n of numbers) seconds = seconds * 60 + n
+  return seconds
+}

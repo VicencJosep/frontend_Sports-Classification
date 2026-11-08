@@ -12,6 +12,8 @@ interface VideoStageProps {
   clock: VideoClock
   /** Overlay canvas (rendered above the video, below the click layer). */
   children?: ReactNode
+  /** Interactive elements over the video (above the click layer), e.g. the clickable event card. */
+  uiLayer?: ReactNode
   note?: ReactNode
   badges?: ReactNode
   muted: boolean
@@ -27,7 +29,7 @@ const SEEK_LARGE_S = 10
  * click-to-toggle and keyboard shortcuts. Fullscreen is delegated to the
  * parent so the controls stay visible in fullscreen mode.
  */
-export function VideoStage({ video, clock, children, note, badges, muted, onToggleMute, onToggleFullscreen }: VideoStageProps) {
+export function VideoStage({ video, clock, children, uiLayer, note, badges, muted, onToggleMute, onToggleFullscreen }: VideoStageProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const playing = useClockPlaying(clock)
 
@@ -96,6 +98,7 @@ export function VideoStage({ video, clock, children, note, badges, muted, onTogg
           </span>
         </div>
       )}
+      {uiLayer}
       {badges && <div className={s.stageBadge}>{badges}</div>}
       {note && <div className={s.stageNote}>{note}</div>}
     </div>
