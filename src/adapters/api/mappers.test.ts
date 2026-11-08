@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { resolveContentUrl, toMatch, toMatchAnalysis, toTrackingFrames } from './mappers'
+import { resolveContentUrl, toMatch, toMatchAnalysis, toMatchEvent, toTrackingFrames } from './mappers'
 import type { ApiMatch, ApiPartAnalysis, ApiTrackingFrame, ApiVideo } from './wire'
 
 const video: ApiVideo = {
@@ -65,6 +65,12 @@ describe('api mappers', () => {
     expect(analysis.teams.byTrackerId.get(7)).toBe(1)
     expect(analysis.teams.excluded.get(9)).toBe('never_player')
     expect(analysis.teams.clusters.map((c) => c.cluster)).toEqual([0, 1])
+  })
+
+  it('maps goal source and score, null when absent', () => {
+    const base = { id: 'evt-0000', label: 'goal', start_s: 10, end_s: 12, peak_confidence: 1, mean_confidence: 1, n_windows: 1 }
+    expect(toMatchEvent({ ...base, goal_source: 'scoreboard', score: [1, 0] })).toMatchObject({ goalSource: 'scoreboard', score: [1, 0] })
+    expect(toMatchEvent(base)).toMatchObject({ goalSource: null, score: null })
   })
 
   it('maps tracking frames', () => {

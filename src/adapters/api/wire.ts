@@ -55,6 +55,8 @@ export interface ApiHighlightClip {
   team_cluster: number | null
   final_score: number
   vlm_rank: number | null
+  /** SoccerHigh (VideoMAEv2) confidence that the play belongs in the official summary, 0-1. */
+  soccerhigh_score?: number | null
   /** Relative to the API base URL, null when the clip was not cut. */
   content_url: string | null
 }
@@ -117,6 +119,8 @@ export interface ApiMatchEvent {
   peak_confidence: number
   mean_confidence: number
   n_windows: number
+  goal_source?: string | null
+  score?: number[] | null
 }
 
 export interface ApiBallAction {

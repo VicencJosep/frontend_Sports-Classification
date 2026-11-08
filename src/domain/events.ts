@@ -17,6 +17,13 @@ export interface MatchEvent {
   meanConfidence: number
   /** Number of classifier windows merged into the span (1 for T-DEED peaks). */
   nWindows: number
+  /**
+   * Goals only (`analytics/goals.py`): what confirmed it. `scoreboard` (the broadcast score changed),
+   * `kickoff` (centre restart after the shot) or `tdeed` (model only, unconfirmed). null otherwise.
+   */
+  goalSource: string | null
+  /** Score after the goal [home, away], when the scoreboard confirmed it. */
+  score: readonly [number, number] | null
 }
 
 /**

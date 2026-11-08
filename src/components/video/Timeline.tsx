@@ -16,7 +16,22 @@ interface TimelineProps {
   onSelectEvent?: (event: MatchEvent) => void
 }
 
-/** Seekable progress bar with event markers (dot at the seek point, thin bar for the span). */
+const GOAL_SOURCE_TEXT: Readonly<Record<string, string>> = {
+  scoreboard: 'confirmed by the scoreboard',
+  kickoff: 'confirmed by the kick-off',
+  tdeed: 'model only, not confirmed',
+}
+
+function goalText(event: MatchEvent): string {
+  const score = event.score ? ` ${event.score[0]}-${event.score[1]}` : ''
+  const source = event.goalSource ? ` (${GOAL_SOURCE_TEXT[event.goalSource] ?? event.goalSource})` : ''
+  return `Goal${score}${source}`
+}
+
+/**
+ * Seekable progress bar with event markers (dot at the seek point, thin bar for the span).
+ * Goals get a flag above the bar with the score; unconfirmed ones are drawn dashed.
+ */
 export function Timeline({ clock, durationS, events, onSelectEvent }: TimelineProps) {
   const timeS = useClockTime(clock)
   const trackRef = useRef<HTMLDivElement>(null)
@@ -83,22 +98,42 @@ export function Timeline({ clock, durationS, events, onSelectEvent }: TimelinePr
             aria-hidden="true"
           />
         ))}
-        {events.map((event) => (
-          <button
-            key={event.id}
-            type="button"
-            className={cx(s.marker, (event.label === 'goal' || event.label === 'shot' || event.label === 'penalty') && s.markerKey)}
-            style={{ left: pct(event.seekS), '--marker-color': eventColor(event.label) } as CSSProperties}
-            title={`${formatClock(event.seekS)} · ${labelDisplayName(event.label)}`}
-            aria-label={`${labelDisplayName(event.label)} at ${formatClock(event.seekS)}`}
-            onPointerDown={(e) => e.stopPropagation()}
-            onClick={(e) => {
-              e.stopPropagation()
-              clock.seek(event.seekS)
-              onSelectEvent?.(event)
-            }}
-          />
-        ))}
+        {events.map((event) =>
+          event.label === 'goal' ? (
+            <button
+              key={event.id}
+              type="button"
+              className={cx(s.goalMarker, (event.goalSource === 'tdeed' || event.goalSource === null) && s.goalUnconfirmed)}
+              style={{ left: pct(event.seekS), '--marker-color': eventColor(event.label) } as CSSProperties}
+              title={`${formatClock(event.seekS)} · ${goalText(event)}`}
+              aria-label={`${goalText(event)} at ${formatClock(event.seekS)}`}
+              onPointerDown={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation()
+                clock.seek(event.seekS)
+                onSelectEvent?.(event)
+              }}
+            >
+              <span className={s.goalBadge}>{event.score ? `${event.score[0]}-${event.score[1]}` : 'GOAL'}</span>
+              <span className={s.goalStem} />
+            </button>
+          ) : (
+            <button
+              key={event.id}
+              type="button"
+              className={cx(s.marker, (event.label === 'shot' || event.label === 'penalty') && s.markerKey)}
+              style={{ left: pct(event.seekS), '--marker-color': eventColor(event.label) } as CSSProperties}
+              title={`${formatClock(event.seekS)} · ${labelDisplayName(event.label)}`}
+              aria-label={`${labelDisplayName(event.label)} at ${formatClock(event.seekS)}`}
+              onPointerDown={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation()
+                clock.seek(event.seekS)
+                onSelectEvent?.(event)
+              }}
+            />
+          ),
+        )}
         <div className={s.playhead} style={{ left: pct(timeS) }} />
         {hover !== null && (
           <span className={s.hoverTip} style={{ left: pct(hover) }}>

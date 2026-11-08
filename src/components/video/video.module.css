@@ -134,8 +134,8 @@
 /* ---------- timeline ---------- */
 .timeline {
   position: relative;
-  height: 36px;
-  padding: 10px 0 6px;
+  height: 54px;
+  padding: 28px 0 6px; /* room above the bar for the goal flags */
   cursor: pointer;
   user-select: none;
   touch-action: none;
@@ -195,6 +195,53 @@
 .marker:focus-visible {
   transform: scale(1.35);
   z-index: 2;
+}
+
+/* Goal: flag above the bar (score badge + stem that crosses the bar). */
+.goalMarker {
+  position: absolute;
+  bottom: -5px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+
+.goalBadge {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--marker-color);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  box-shadow: 0 0 0 2px var(--bg-elev-1), 0 0 12px var(--marker-color);
+  transition: transform 100ms ease;
+}
+
+.goalStem {
+  width: 2px;
+  height: 17px;
+  background: var(--marker-color);
+}
+
+.goalUnconfirmed .goalBadge {
+  border: 1px dashed var(--marker-color);
+  background: var(--bg-elev-1);
+  color: var(--marker-color);
+  box-shadow: none;
+}
+
+.goalMarker:hover .goalBadge,
+.goalMarker:focus-visible .goalBadge {
+  transform: scale(1.12);
 }
 
 .playhead {

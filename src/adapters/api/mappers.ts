@@ -86,6 +86,7 @@ export function toHighlightClip(clip: ApiHighlightClip, baseUrl: string): Highli
     teamCluster: clip.team_cluster,
     finalScore: clip.final_score,
     vlmRank: clip.vlm_rank,
+    soccerhighScore: clip.soccerhigh_score ?? null,
     contentUrl: clip.content_url ? resolveContentUrl(baseUrl, clip.content_url) : null,
   }
 }
@@ -142,7 +143,14 @@ export function toMatchEvent(event: ApiMatchEvent): MatchEvent {
     peakConfidence: event.peak_confidence,
     meanConfidence: event.mean_confidence,
     nWindows: event.n_windows,
+    goalSource: event.goal_source ?? null,
+    score: toScore(event.score),
   }
+}
+
+function toScore(score: readonly number[] | null | undefined): readonly [number, number] | null {
+  const [home, away] = score ?? []
+  return home !== undefined && away !== undefined ? [home, away] : null
 }
 
 export function toBallAction(action: ApiBallAction): BallAction {

@@ -92,6 +92,8 @@ export interface RawEventSpan {
   peak_confidence: number
   mean_confidence: number
   n_windows: number
+  goal_source?: string | null
+  score?: number[] | null
 }
 
 /** analytics/engine.py PossessionChangeAction. */

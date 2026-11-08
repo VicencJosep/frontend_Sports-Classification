@@ -27,6 +27,8 @@ export interface HighlightClip {
   teamCluster: number | null
   finalScore: number
   vlmRank: number | null
+  /** SoccerHigh (VideoMAEv2) confidence that the play belongs in the official summary, 0-1; null when not run. */
+  soccerhighScore: number | null
   /** Absolute URL of the cut clip (MP4), null when it was not cut. */
   contentUrl: string | null
 }

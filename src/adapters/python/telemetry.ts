@@ -39,6 +39,8 @@ function spanToEvent(span: RawEventSpan, index: number): MatchEvent {
     peakConfidence: span.peak_confidence,
     meanConfidence: span.mean_confidence,
     nWindows: span.n_windows,
+    goalSource: span.goal_source ?? null,
+    score: span.score?.length === 2 ? [span.score[0] ?? 0, span.score[1] ?? 0] : null,
   }
 }
 
@@ -64,6 +66,8 @@ export function toEvents(raw: RawTelemetry, ctx: Pick<TelemetryContext, 'duratio
       peakConfidence: prediction.confidence,
       meanConfidence: prediction.confidence,
       nWindows: 1,
+      goalSource: null,
+      score: null,
     },
   ]
 }

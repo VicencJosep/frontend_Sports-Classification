@@ -159,6 +159,11 @@ export function HighlightsPanel({ matchId, partId, analysisCompleted, onSeek, on
                     <span className={s.main}>
                       <span className={s.title}>
                         {labelBadge(clip.label)}
+                        {clip.soccerhighScore !== null && (
+                          <Badge tone="neutral" title="SoccerHigh: confidence that an editor would put this play in the official summary">
+                            SH {Math.round(clip.soccerhighScore * 100)}%
+                          </Badge>
+                        )}
                         <span>{clip.title}</span>
                       </span>
                       <span className={s.sub}>
