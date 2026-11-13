@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useEffect, useMemo, useRef, useState } from 'react'
 
-import { Button, EmptyState, IconScissors } from '@/components/common'
+import { Button, EmptyState, IconPencil, IconScissors } from '@/components/common'
 import type { MatchEvent } from '@/domain'
 import type { VideoClock } from '@/lib/videoClock'
 import { cx } from '@/utils/cx'
@@ -16,8 +16,10 @@ interface EventListProps {
   clock: VideoClock
   onSelect: (event: MatchEvent) => void
   showConfidence: boolean
-  /** Shows a scissors button on each row that opens the clip editor for that event. */
+  /** Shows a button on each row that opens the clip editor for that event. */
   onCreateClip?: (event: MatchEvent) => void
+  /** The editor can also correct the event (reviewed copy): the row button is a pencil instead of scissors. */
+  editable?: boolean
 }
 
 type EventFilter = 'all' | 'attack' | 'set-pieces' | 'discipline' | 'other'
@@ -43,8 +45,9 @@ function matches(filter: EventFilter, label: string): boolean {
 /**
  * Play history: chronological event timeline with filters. Clicking a row seeks
  * the video to the event; the rows whose span contains the playhead are highlighted.
+ * Memoised: it renders when its own props change, not on every state change of the viewer (pass stable callbacks).
  */
-export function EventList({ events, clock, onSelect, showConfidence, onCreateClip }: EventListProps) {
+export const EventList = memo(function EventList({ events, clock, onSelect, showConfidence, onCreateClip, editable = false }: EventListProps) {
   const [filter, setFilter] = useState<EventFilter>('all')
   const visible = useMemo(() => events.filter((e) => matches(filter, e.label)), [events, filter])
   const activeKey = useActiveEventKey(clock, visible)
@@ -108,11 +111,27 @@ export function EventList({ events, clock, onSelect, showConfidence, onCreateCli
                       {event.nWindows > 1 ? ` · ${event.nWindows} windows` : ''}
                     </span>
                   </span>
-                  <span className={s.right}>{showConfidence && <span title="Peak confidence">{formatPercent(event.peakConfidence)}</span>}</span>
+                  <span className={s.right}>
+                    {event.review ? (
+                      <span className={s.reviewTag} title={event.review === 'added' ? 'Added by hand' : 'Corrected by hand'}>
+                        {event.review}
+                      </span>
+                    ) : (
+                      showConfidence && <span title="Peak confidence">{formatPercent(event.peakConfidence)}</span>
+                    )}
+                  </span>
                 </button>
                 {onCreateClip && (
-                  <Button iconOnly size="sm" variant="ghost" className={s.rowAction} onClick={() => onCreateClip(event)} aria-label={`Cut a clip from this ${event.label}`} title="Cut a clip from this event">
-                    <IconScissors size={14} />
+                  <Button
+                    iconOnly
+                    size="sm"
+                    variant="ghost"
+                    className={s.rowAction}
+                    onClick={() => onCreateClip(event)}
+                    aria-label={editable ? `Edit this ${event.label}` : `Cut a clip from this ${event.label}`}
+                    title={editable ? 'Correct this event or cut a clip from it' : 'Cut a clip from this event'}
+                  >
+                    {editable ? <IconPencil size={14} /> : <IconScissors size={14} />}
                   </Button>
                 )}
               </li>
@@ -122,4 +141,4 @@ export function EventList({ events, clock, onSelect, showConfidence, onCreateCli
       )}
     </>
   )
-}
+})

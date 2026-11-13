@@ -2,7 +2,8 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  max-height: calc(100vh - 330px);
+  /* The viewer raises --stage-reserve while the clip editor is open, so the video and the editor fit together. */
+  max-height: calc(100vh - var(--stage-reserve, 330px));
   min-height: 300px;
   background: #000;
   box-shadow: 0 0 0 1px rgba(0, 174, 239, 0.25);
@@ -370,4 +371,16 @@
 
 .clipButton {
   margin-left: var(--sp-2);
+}
+
+/* ---------- picking a player on the video (clip editor open) ---------- */
+.pickLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.pickLayerOver {
+  cursor: crosshair;
 }

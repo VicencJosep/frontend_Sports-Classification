@@ -7,6 +7,7 @@ import {
   defaultClipRange,
   describePlayer,
   draftAtTime,
+  draftFromAction,
   draftFromClip,
   draftFromEvent,
   playerAround,
@@ -82,7 +83,7 @@ describe('clip ranges', () => {
 describe('drafts', () => {
   const ctx = { matchId: 'm1', partId: 'full', video: { durationS: 5400, fps: FPS }, actions: [action()] }
 
-  it('builds a draft from an event with the possessor around its seek point', () => {
+  it('builds a draft from an event with the possessor around its instant', () => {
     const draft = draftFromEvent(event(), ctx)
     expect(draft).toMatchObject({
       id: null,
@@ -96,6 +97,32 @@ describe('drafts', () => {
       title: 'Shot · 00:33',
       notes: '',
     })
+  })
+
+  it('takes the action nearest to the peak of the span, not to its start', () => {
+    const actions = [action({ id: 'early', timestampS: 32.6, trackerId: 11 }), action({ id: 'peak', timestampS: 34.1, trackerId: 22 })]
+    expect(draftFromEvent(event({ startS: 33, endS: 35 }), { ...ctx, actions }).player?.trackerId).toBe(22)
+  })
+
+  it('keeps the player of a reviewed event instead of guessing it from the actions', () => {
+    const draft = draftFromEvent(event({ trackerId: 3040, jersey: null, teamCluster: 0 }), ctx)
+    expect(draft.player).toEqual({ trackerId: 3040, jersey: null, teamCluster: 0, name: null })
+  })
+
+  it('builds a draft from a ball action: short window, its own player', () => {
+    const draft = draftFromAction(action({ id: 'act-825', label: 'drive', timestampS: 33.04, frameIdx: 826 }), ctx)
+    expect(draft).toMatchObject({
+      id: null,
+      sourceEventId: 'act-825',
+      detectedLabel: 'drive',
+      label: 'drive',
+      startS: 30.04,
+      endS: 36.04,
+      anchorS: 33.04,
+      player: { trackerId: 1907, jersey: 9, teamCluster: 1, name: null },
+      title: 'Drive · 00:33',
+    })
+    expect(draftFromAction(action({ trackerId: null }), ctx).player).toBeNull()
   })
 
   it('ignores background and unattributed actions, picks the nearest', () => {

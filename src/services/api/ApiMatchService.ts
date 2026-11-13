@@ -1,19 +1,25 @@
 import {
+  toApiReviewCreate,
+  toApiReviewPatch,
   toMatch,
   toMatchAnalysis,
   toPartHighlights,
+  toReviewResult,
+  toReviewSheet,
   toTrackingFrames,
   type ApiErrorBody,
   type ApiHighlightsResponse,
   type ApiMatch,
   type ApiMatchCreate,
   type ApiPartAnalysis,
+  type ApiReviewExport,
+  type ApiReviewItemResult,
   type ApiTrackingWindow,
   type ApiVideo,
 } from '@/adapters/api'
 import type { CreateMatchInput, Match, MatchAnalysis, PartHighlights, TrackingFrame } from '@/domain'
 
-import { ServiceError, type MatchService, type ServiceErrorCode, type StartAnalysisOptions, type TrackingRange } from '../MatchService'
+import { ServiceError, isServiceError, type MatchService, type ReviewService, type ServiceErrorCode, type StartAnalysisOptions, type TrackingRange } from '../MatchService'
 
 export interface ApiMatchServiceOptions {
   /** Origin of the FastAPI backend, e.g. `http://localhost:8100`. */
@@ -35,6 +41,30 @@ export class ApiMatchService implements MatchService {
   constructor(options: ApiMatchServiceOptions) {
     this.baseUrl = options.baseUrl.replace(/\/$/, '')
     this.fetchFn = options.fetchFn ?? ((input, init) => fetch(input, init))
+  }
+
+  /** Corrections go to the reviewed copy the backend keeps next to the analysis (`review/analysis.json`). */
+  readonly review: ReviewService = {
+    updateItem: async (matchId, partId, itemId, patch) => {
+      const path = partPath(matchId, partId, `review/items/${encodeURIComponent(itemId)}`)
+      return toReviewResult(await this.request<ApiReviewItemResult>(path, { method: 'PATCH', body: JSON.stringify(toApiReviewPatch(patch)) }))
+    },
+    addItem: async (matchId, partId, input) => {
+      const path = partPath(matchId, partId, 'review/items')
+      return toReviewResult(await this.request<ApiReviewItemResult>(path, { method: 'POST', body: JSON.stringify(toApiReviewCreate(input)) }))
+    },
+    deleteItem: async (matchId, partId, itemId) => {
+      const path = partPath(matchId, partId, `review/items/${encodeURIComponent(itemId)}`)
+      return toReviewResult(await this.request<ApiReviewItemResult>(path, { method: 'DELETE' }))
+    },
+    restoreItem: async (matchId, partId, itemId) => {
+      const path = partPath(matchId, partId, `review/items/${encodeURIComponent(itemId)}/restore`)
+      return toReviewResult(await this.request<ApiReviewItemResult>(path, { method: 'POST' }))
+    },
+    exportSheet: async (matchId, partId, fromS, toS) => {
+      const path = partPath(matchId, partId, 'review/export')
+      return toReviewSheet(await this.request<ApiReviewExport>(path, { method: 'POST', body: JSON.stringify({ from_s: fromS, to_s: toS }) }))
+    },
   }
 
   async listMatches(): Promise<Match[]> {
@@ -92,9 +122,17 @@ export class ApiMatchService implements MatchService {
     return toPartHighlights(response, this.baseUrl)
   }
 
+  /**
+   * The reviewed copy when there is one, otherwise the pipeline output (`/review` serves both). A backend
+   * without that route answers 404: the plain analysis is used and corrections stay off (`review` null).
+   */
   async getPartAnalysis(matchId: string, partId: string): Promise<MatchAnalysis> {
-    const analysis = await this.getJson<ApiPartAnalysis>(`/api/matches/${encodeURIComponent(matchId)}/parts/${encodeURIComponent(partId)}/analysis`)
-    return toMatchAnalysis(analysis)
+    try {
+      return toMatchAnalysis(await this.getJson<ApiPartAnalysis>(partPath(matchId, partId, 'review')))
+    } catch (error) {
+      if (!isServiceError(error) || error.code !== 'not-found') throw error
+    }
+    return toMatchAnalysis(await this.getJson<ApiPartAnalysis>(partPath(matchId, partId, 'analysis')))
   }
 
   /** Without a range the first `API_TRACKING_MAX_WINDOW_S` seconds are returned; the viewer always passes one. */

@@ -219,3 +219,16 @@
   font-family: var(--font-mono);
   font-size: 10px;
 }
+
+/* A detection the user corrected or added by hand (reviewed copy) */
+.reviewTag {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--success-soft);
+  color: var(--success);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}

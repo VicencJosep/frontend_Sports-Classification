@@ -21,6 +21,8 @@ export interface ApiVideo {
   uploaded_at: string
   /** Relative to the API base URL (`/api/videos/{id}/content`). */
   content_url: string
+  /** Frame thumbnails (`/api/videos/{id}/thumbnail?t=<s>&h=<px>`); absent on a backend without them. */
+  thumbnail_url?: string
 }
 
 export interface ApiHighlightsSummary {
@@ -121,6 +123,12 @@ export interface ApiMatchEvent {
   n_windows: number
   goal_source?: string | null
   score?: number[] | null
+  /** Reviewed copy (`/review`) only. */
+  tracker_id?: number | null
+  team_cluster?: number | null
+  jersey?: number | null
+  side?: string | null
+  review?: string | null
 }
 
 export interface ApiBallAction {
@@ -135,6 +143,9 @@ export interface ApiBallAction {
   probabilities: Record<string, number>
   is_background: boolean
   spot_score: number | null
+  /** Reviewed copy (`/review`) only. */
+  side?: string | null
+  review?: string | null
 }
 
 export interface ApiTeamAssignments {
@@ -153,6 +164,54 @@ export interface ApiPartAnalysis {
   events: ApiMatchEvent[]
   ball_actions: ApiBallAction[]
   teams: ApiTeamAssignments
+  /** Present on `/review` (the reviewed copy, or the pipeline output while nothing was corrected). */
+  review?: ApiReviewInfo | null
+}
+
+export interface ApiReviewInfo {
+  exists: boolean
+  created_at: string | null
+  updated_at: string | null
+  n_edited: number
+  n_added: number
+  n_deleted: number
+  stale?: boolean
+  /** JSON object keys are strings even though tracker ids are numbers. */
+  tracker_sides: Record<string, string>
+}
+
+/** Body of `PATCH /review/items/{id}`: only the fields to change. */
+export interface ApiReviewItemPatch {
+  label?: string
+  time_s?: number
+  tracker_id?: number | null
+  side?: string | null
+}
+
+export interface ApiReviewItemCreate {
+  kind: 'action' | 'event'
+  label: string
+  time_s: number
+  tracker_id: number | null
+  side: string | null
+}
+
+export interface ApiReviewItemResult {
+  kind: 'action' | 'event'
+  id: string
+  deleted: boolean
+  action: ApiBallAction | null
+  event: ApiMatchEvent | null
+  review: ApiReviewInfo
+}
+
+export interface ApiReviewExport {
+  from_s: number
+  to_s: number
+  n_rows: number
+  filename: string
+  path: string
+  csv: string
 }
 
 export type ApiXy = [number, number]

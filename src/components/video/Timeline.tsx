@@ -135,7 +135,7 @@ export function Timeline({ clock, durationS, events, onSelectEvent, clips = [], 
             <button
               key={event.id}
               type="button"
-              className={cx(s.marker, (event.label === 'shot' || event.label === 'penalty') && s.markerKey)}
+              className={cx(s.marker, event.label === 'penalty' && s.markerKey)}
               style={{ left: pct(event.seekS), '--marker-color': eventColor(event.label) } as CSSProperties}
               title={`${formatClock(event.seekS)} · ${labelDisplayName(event.label)}`}
               aria-label={`${labelDisplayName(event.label)} at ${formatClock(event.seekS)}`}

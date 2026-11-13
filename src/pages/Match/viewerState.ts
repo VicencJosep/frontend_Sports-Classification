@@ -1,10 +1,18 @@
 import { DEFAULT_LAYERS, type LayerId, type LayerState } from '@/components/layers/layers'
-import type { MatchEvent, SavedClip } from '@/domain'
+import type { ReviewSubject, SavedClip } from '@/domain'
+import { subjectId } from '@/domain'
 
 export type SidebarTab = 'events' | 'actions' | 'highlights' | 'clips'
 
-/** What the clip editor is open on: a new clip from an event (or the playhead) or a saved clip. */
-export type EditorTarget = { kind: 'new'; event: MatchEvent | null; atS: number; opened: number } | { kind: 'edit'; clip: SavedClip; opened: number }
+/**
+ * What the clip editor is open on: a detected event or ball action (to correct it or cut a clip from it), the
+ * playhead (`subject` null: a plain clip, or a play the pipeline missed) or a saved clip.
+ * `intent` says what Enter does on a new item (save the correction / add the event, or save the clip) and
+ * `resume` that the video was playing when the editor opened, so a saved correction carries on playing.
+ */
+export type EditorTarget =
+  | { kind: 'new'; subject: ReviewSubject | null; atS: number; opened: number; intent: 'clip' | 'review'; resume: boolean }
+  | { kind: 'edit'; clip: SavedClip; opened: number }
 
 export interface ViewerState {
   layers: LayerState
@@ -44,5 +52,6 @@ export function viewerReducer(state: ViewerState, action: ViewerAction): ViewerS
 
 /** Key that remounts the editor when its target changes (a different event or clip, or reopened). */
 export function editorKey(target: EditorTarget): string {
-  return target.kind === 'edit' ? `edit:${target.clip.id}:${target.opened}` : `new:${target.event?.id ?? 'playhead'}:${target.opened}`
+  if (target.kind === 'edit') return `edit:${target.clip.id}:${target.opened}`
+  return `new:${target.subject ? subjectId(target.subject) : 'playhead'}:${target.opened}`
 }

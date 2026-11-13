@@ -16,6 +16,12 @@ export interface VideoInfo {
   durationS: number
   /** Presentation timestamp of the first frame, usually 0. */
   startTimeS: number
+  /**
+   * Endpoint that serves one frame as a small JPEG (`?t=<seconds>&h=<px>`). The clip editor's filmstrip uses it
+   * instead of seeking through the video itself, which downloads tens of MB per strip. Absent or null when the
+   * data source has no such endpoint (mock fixtures).
+   */
+  thumbnailUrl?: string | null
 }
 
 /** One analysed video file: the whole match, or one half. */

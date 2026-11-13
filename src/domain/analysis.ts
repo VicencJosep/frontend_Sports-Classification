@@ -1,4 +1,5 @@
 import type { BallAction, MatchEvent } from './events'
+import type { ReviewInfo } from './review'
 import type { TeamAssignments } from './teams'
 import type { AnalysisMode } from './vocab'
 
@@ -15,4 +16,9 @@ export interface MatchAnalysis {
   frameCount: number
   /** Path of the source video as recorded by the pipeline, for traceability. */
   sourceVideoPath: string | null
+  /**
+   * State of the reviewed copy the events and actions come from. Absent or null when the data source has no
+   * reviewed copies (mock fixtures, an older backend): the lists are then the raw pipeline output.
+   */
+  review?: ReviewInfo | null
 }

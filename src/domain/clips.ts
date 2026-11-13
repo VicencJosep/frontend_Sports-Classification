@@ -1,9 +1,10 @@
 import { labelDisplayName } from './display'
 import type { BallAction, MatchEvent } from './events'
+import { eventInstantS } from './events'
 import type { VideoInfo } from './match'
 import type { TeamAssignments } from './teams'
 import { teamOf } from './teams'
-import { EVENT_LABELS, type EventLabel, type TeamCluster } from './vocab'
+import { REVIEW_LABELS, type EventLabel, type TeamCluster } from './vocab'
 
 /**
  * Clips the user cuts from the viewer: an event of the play history (or any
@@ -21,8 +22,8 @@ export interface ClipPlayer {
   name: string | null
 }
 
-/** `play` marks a clip that is not one of the detected event classes. */
-export const CLIP_LABELS = [...EVENT_LABELS, 'play'] as const
+/** The annotation vocabulary (events and ball actions) plus `play`, a clip that is none of those classes. */
+export const CLIP_LABELS = [...REVIEW_LABELS, 'play'] as const
 export type ClipLabel = EventLabel | 'play'
 
 export interface SavedClip {
@@ -68,6 +69,8 @@ const CLIP_PADDING: Readonly<Record<string, ClipPadding>> = {
   kick_off: { beforeS: 2, afterS: 8 },
 }
 const DEFAULT_PADDING: ClipPadding = { beforeS: 5, afterS: 5 }
+/** A ball action is an instant: a short window is enough to see it, and keeps the trim bar frame-accurate. */
+const BALL_ACTION_PADDING: ClipPadding = { beforeS: 3, afterS: 3 }
 /** A ball action this close to the event's seek point is taken as "who made it". */
 const PLAYER_ATTRIBUTION_WINDOW_S = 2.5
 
@@ -155,7 +158,7 @@ interface DraftContext {
   actions: readonly BallAction[]
 }
 
-/** New clip from a detected event: padded span, the event's label, the possessor around its seek point. */
+/** New clip from a detected event: padded span, the event's label, the possessor around its instant (the peak of the span). */
 export function draftFromEvent(event: MatchEvent, ctx: DraftContext): ClipDraft {
   const range = defaultClipRange(event, ctx.video.durationS, ctx.video.fps)
   return {
@@ -168,8 +171,32 @@ export function draftFromEvent(event: MatchEvent, ctx: DraftContext): ClipDraft 
     startS: range.startS,
     endS: range.endS,
     anchorS: snapToFrame(event.seekS, ctx.video.fps),
-    player: playerAround(event.seekS, ctx.actions),
+    // A reviewed event carries its own player; the pipeline's events never do.
+    player:
+      event.trackerId !== null && event.trackerId !== undefined
+        ? { trackerId: event.trackerId, jersey: event.jersey ?? null, teamCluster: event.teamCluster ?? null, name: null }
+        : playerAround(eventInstantS(event), ctx.actions),
     title: defaultClipTitle(event.label, event.seekS),
+    notes: '',
+  }
+}
+
+/** New clip from a ball action: a short window around its frame, its label and the player it was attributed to. */
+export function draftFromAction(action: BallAction, ctx: Omit<DraftContext, 'actions'>): ClipDraft {
+  const { fps, durationS } = ctx.video
+  const range = clampClipRange(action.timestampS - BALL_ACTION_PADDING.beforeS, action.timestampS + BALL_ACTION_PADDING.afterS, durationS, fps)
+  return {
+    id: null,
+    matchId: ctx.matchId,
+    partId: ctx.partId,
+    sourceEventId: action.id,
+    detectedLabel: action.label,
+    label: action.label,
+    startS: range.startS,
+    endS: range.endS,
+    anchorS: snapToFrame(action.timestampS, fps),
+    player: action.trackerId !== null ? { trackerId: action.trackerId, jersey: action.jersey, teamCluster: action.teamCluster, name: null } : null,
+    title: defaultClipTitle(action.label, action.timestampS),
     notes: '',
   }
 }

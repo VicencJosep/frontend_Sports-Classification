@@ -15,3 +15,17 @@ export function rulerTicks(fromS: number, toS: number): number[] {
   for (let t = Math.ceil(fromS / step) * step; t <= toS + 1e-6; t += step) ticks.push(Math.round(t * 1000) / 1000)
   return ticks
 }
+
+const THUMBNAIL_GRIDS = [600, 300, 120, 60, 30, 15, 10, 5, 2, 1, 0.5, 0.2, 0.1]
+
+/**
+ * Instants of the `count` thumbnails of a view. Each is the centre of its tile snapped to a grid at most half the
+ * tile spacing, so neighbouring tiles never collapse and the same instants (hence the same URLs, cached by the
+ * browser and by the backend) come back when the view pans or the editor reopens nearby.
+ */
+export function thumbnailTimes(fromS: number, toS: number, count: number): number[] {
+  if (count <= 0 || !(toS > fromS)) return []
+  const spacing = (toS - fromS) / count
+  const grid = THUMBNAIL_GRIDS.find((g) => g <= spacing / 2 + 1e-9) ?? 0.1
+  return Array.from({ length: count }, (_, i) => Math.max(0, Math.round(Math.round((fromS + (i + 0.5) * spacing) / grid) * grid * 10) / 10))
+}

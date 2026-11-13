@@ -67,9 +67,84 @@
 
 .editorFields {
   display: grid;
-  grid-template-columns: 180px minmax(220px, 1fr) minmax(200px, 1.2fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--sp-3);
   align-items: start;
+}
+
+/* Event type: one chip per label, the first ten with their number key */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px 0 8px;
+  border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--chip-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev-1);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background-color 100ms ease,
+    color 100ms ease,
+    border-color 100ms ease;
+}
+
+.chip:hover {
+  background: var(--bg-elev-3);
+  color: var(--text);
+}
+
+.chipOn,
+.chipOn:hover {
+  border-color: var(--chip-color);
+  background: var(--chip-color);
+  color: #0b0f14;
+  font-weight: 700;
+}
+
+.chipKey {
+  min-width: 14px;
+  padding: 0 3px;
+  border-radius: 3px;
+  background: rgba(159, 176, 195, 0.16);
+  color: var(--text-faint);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 15px;
+  text-align: center;
+}
+
+.chipOn .chipKey {
+  background: rgba(11, 15, 20, 0.22);
+  color: #0b0f14;
+}
+
+/* A detection already corrected or added by hand */
+.reviewMark {
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--success-soft);
+  color: var(--success);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.reviewError {
+  color: var(--danger);
+  font-size: var(--fs-xs);
 }
 
 .editorActions {
@@ -105,7 +180,15 @@
   color: var(--accent);
 }
 
-/* Start / end fields */
+/* Start / end / instant fields */
+.timeField.timeFieldAccent {
+  border-color: rgba(0, 174, 239, 0.55);
+}
+
+.timeFieldAccent .timeLabel {
+  color: var(--accent);
+}
+
 .timeField {
   display: inline-flex;
   align-items: center;
@@ -211,6 +294,7 @@
 .thumb {
   flex: none;
   display: block;
+  object-fit: cover;
   background: #0a0f16;
   opacity: 0.35;
   transition: opacity 180ms ease;

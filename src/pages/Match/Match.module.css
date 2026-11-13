@@ -107,6 +107,12 @@
   background: var(--bg-elev-1);
 }
 
+/* Clip editor open: the video gives up height so the whole editor is on screen under it (top bar + editor). */
+.playerEditing {
+  --stage-reserve: 450px;
+  scroll-margin-top: 4px;
+}
+
 .player:fullscreen {
   background: #000;
   border-radius: 0;

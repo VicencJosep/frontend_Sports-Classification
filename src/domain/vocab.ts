@@ -36,6 +36,39 @@ export const BALL_ACTION_LABELS = ['pass', 'drive', 'high_pass', 'header', 'thro
 export type KnownBallActionLabel = (typeof BALL_ACTION_LABELS)[number]
 export type BallActionLabel = KnownBallActionLabel | AnyString
 
+/**
+ * Labels a corrected ball action or event can carry: the vocabulary of the manual annotation sheet
+ * (`scripts/annotation_csv.py::LABELS`), canonical spelling, same list as the backend's `REVIEW_LABELS`.
+ * The order is the keyboard order of the editor: keys 1-9 and 0 pick the first ten.
+ */
+export const REVIEW_LABELS = [
+  'pass',
+  'drive',
+  'high_pass',
+  'header',
+  'throw_in',
+  'cross',
+  'shot',
+  'goal',
+  'corner',
+  'foul',
+  'free_kick',
+  'out',
+  'player_successful_tackle',
+  'ball_player_block',
+  'penalty',
+  'kick_off',
+  'card',
+  'offside',
+  'substitution',
+] as const
+
+/** Which team made a play, as the user annotates it (the pipeline only knows appearance clusters). */
+export type ReviewSide = 'home' | 'away'
+/** How a reviewed item differs from the pipeline output; absent or null = untouched. */
+export type ReviewStatus = 'edited' | 'added'
+export type ReviewKind = 'action' | 'event'
+
 /** Person roles emitted by the detector (`core/tracking.py::ROLE_TO_CLASS_ID`, minus "ball"). */
 export const ROLES = ['player', 'goalkeeper', 'referee', 'other'] as const
 export type Role = (typeof ROLES)[number]

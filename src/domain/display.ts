@@ -30,6 +30,14 @@ export const BALL_ACTION_COLORS: Readonly<Record<KnownBallActionLabel, string>> 
   background: '#6b7280',
 }
 
+/** Labels of the annotation vocabulary the pipeline does not emit today (a corrected item can carry them). */
+const EXTRA_LABEL_COLORS: Readonly<Record<string, string>> = {
+  cross: '#38bdf8',
+  out: '#94a3b8',
+  player_successful_tackle: '#f472b6',
+  ball_player_block: '#c4b5fd',
+}
+
 export const NEUTRAL_LABEL_COLOR = '#9aa7b8'
 
 /** Mirrors `--team-a`, `--team-b`, `--team-neutral` in tokens.css. */
@@ -39,15 +47,28 @@ export const BALL_COLOR = '#ffffff'
 export const POSSESSION_COLOR = '#22c55e'
 export const SELECTION_COLOR = '#ffffff'
 
+/** Colour of any label of the annotation vocabulary, whichever list it sits in. */
+export function labelColor(label: string): string {
+  if (isKnownBallActionLabel(label)) return BALL_ACTION_COLORS[label]
+  if (isKnownEventLabel(label)) return EVENT_COLORS[label]
+  return EXTRA_LABEL_COLORS[label] ?? NEUTRAL_LABEL_COLOR
+}
+
+/** An event corrected to a ball-action class (or the reverse) keeps that class's colour. */
 export function eventColor(label: string): string {
-  return isKnownEventLabel(label) ? EVENT_COLORS[label] : NEUTRAL_LABEL_COLOR
+  return isKnownEventLabel(label) ? EVENT_COLORS[label] : labelColor(label)
 }
 
 export function ballActionColor(label: string): string {
-  return isKnownBallActionLabel(label) ? BALL_ACTION_COLORS[label] : NEUTRAL_LABEL_COLOR
+  return isKnownBallActionLabel(label) ? BALL_ACTION_COLORS[label] : labelColor(label)
 }
 
-const DISPLAY_OVERRIDES: Readonly<Record<string, string>> = { kick_off: 'Kick-off', throw_in: 'Throw-in' }
+const DISPLAY_OVERRIDES: Readonly<Record<string, string>> = {
+  kick_off: 'Kick-off',
+  throw_in: 'Throw-in',
+  player_successful_tackle: 'Tackle',
+  ball_player_block: 'Block',
+}
 
 /** "kick_off" -> "Kick-off", "high_pass" -> "High pass", "background_public" -> "Background public". */
 export function labelDisplayName(label: string): string {

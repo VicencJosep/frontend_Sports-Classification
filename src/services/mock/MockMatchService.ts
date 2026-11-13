@@ -43,6 +43,8 @@ interface StoredCreatedMatch {
  * the analysis.
  */
 export class MockMatchService implements MatchService {
+  /** The fixtures are read-only: there is no reviewed copy to save corrections to. */
+  readonly review = null
   private readonly baseUrl: string
   private readonly latencyMs: number
   private readonly storage: Storage | null

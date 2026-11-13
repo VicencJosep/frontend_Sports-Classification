@@ -47,6 +47,7 @@ src/
 │   ├── layers/     layer definitions + availability, LayerPanel
 │   ├── events/     EventList, BallActionList, badges
 │   ├── clips/      ClipEditor, TrimStrip + Filmstrip (trim bar), SavedClipsPanel, playerCandidates
+│   ├── review/     ReviewBar (state of the reviewed copy, undo, ground-truth export)
 │   └── players/    TrackletPanel
 ├── domain/         vocabularies (string unions), Match/MatchPart, TrackingFrame, events, teams, clips, display mappings
 ├── adapters/python raw.ts (Python JSON shapes), guards.ts, tracks.ts, teams.ts, telemetry.ts, real-data tests
@@ -98,7 +99,9 @@ throw-in attributed to a player.
 
 **Clip editor and saved clips**: any detected event can be turned into a clip. Clicking the event card drawn
 top-left on the video (or the ✂ button under the player, or the ✂ on a play-history row) pauses the video and opens
-the editor between the video and the controls: a filmstrip trim bar (`components/clips/TrimStrip.tsx`) with two
+the editor between the video and the controls: a filmstrip trim bar (`components/clips/TrimStrip.tsx`; its
+thumbnails are small JPEGs cut by the backend, `VideoInfo.thumbnailUrl`, never frames sought in the video itself,
+which downloads tens of MB per strip and chokes an SSH tunnel) with two
 handles for the start and the end (drag the middle to move the whole clip; arrows nudge one frame, shift one second;
 `I` / `O` copy the playhead; the main player follows the handle so the exact frame is visible), the detected event as
 an anchor, the other events as ticks and zoom controls. The form corrects the **event type** (shot → goal…), the
@@ -107,6 +110,17 @@ typed name) and the title; *Preview* plays the range in the viewer and stops on 
 the **Saved clips** tab next to Highlights: play, edit, delete with undo and export as JSON. They are frontend-owned
 (`domain/clips.ts`, `lib/clipStore.ts` over `localStorage`, `hooks/useSavedClips.ts`); the backend has no clip
 endpoint yet, so cutting an MP4 of a saved clip (the `analytics/highlights/cut.py` route) is the natural next step.
+
+**Corrections (ground truth from the viewer)**: the same editor corrects what the pipeline detected. Open it on a
+ball action or an event (its card on the video, the pencil on its row, or `E` for the action just played; `N` adds a
+play the pipeline missed at the playhead) and, next to *Save clip*, it offers *Apply correction* and *Delete*. Keys
+`1`-`0` pick the type (`REVIEW_LABELS`, the vocabulary of the pipeline's annotation sheet), `T` moves the instant to the
+playhead, `H`/`A` set the team, clicking a player on the video picks them (`components/video/PlayerPickLayer.tsx`),
+Enter saves and the video carries on. Corrections are saved by the backend in a **reviewed copy** of the analysis
+(`…/review` endpoints, `ReviewService` in `services/MatchService.ts`, `hooks/useMatchReview.ts`, `domain/review.ts`);
+the viewer shows that copy, the pipeline output is never modified. The bar under the player
+(`components/review/ReviewBar.tsx`) counts what was corrected, added and deleted, undoes the last deletion and exports a
+time range as the ground-truth sheet. With the mock data source there is no reviewed copy: the editor only cuts clips.
 
 Branding follows [ugiat.com](https://ugiat.com): logo in `public/brand/`, cyan `#00aeef` accent, the brand
 gradient, Montserrat for headings and Roboto for text (Google Fonts).

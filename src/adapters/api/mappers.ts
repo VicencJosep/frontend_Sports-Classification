@@ -9,6 +9,13 @@ import type {
   MatchPart,
   PartHighlights,
   PersonDetection,
+  ReviewAddInput,
+  ReviewInfo,
+  ReviewPatch,
+  ReviewResult,
+  ReviewSheet,
+  ReviewSide,
+  ReviewStatus,
   TeamAssignments,
   TeamInfo,
   TrackingFrame,
@@ -27,6 +34,11 @@ import type {
   ApiMatchPart,
   ApiPartAnalysis,
   ApiPersonDetection,
+  ApiReviewExport,
+  ApiReviewInfo,
+  ApiReviewItemCreate,
+  ApiReviewItemPatch,
+  ApiReviewItemResult,
   ApiTeamAssignments,
   ApiTrackingFrame,
   ApiVideo,
@@ -41,6 +53,7 @@ export function resolveContentUrl(baseUrl: string, contentUrl: string): string {
 export function toVideoInfo(video: ApiVideo, baseUrl: string): VideoInfo {
   return {
     url: resolveContentUrl(baseUrl, video.content_url),
+    thumbnailUrl: video.thumbnail_url ? resolveContentUrl(baseUrl, video.thumbnail_url) : null,
     width: video.width,
     height: video.height,
     fps: video.fps,
@@ -145,7 +158,20 @@ export function toMatchEvent(event: ApiMatchEvent): MatchEvent {
     nWindows: event.n_windows,
     goalSource: event.goal_source ?? null,
     score: toScore(event.score),
+    trackerId: event.tracker_id ?? null,
+    teamCluster: event.team_cluster ?? null,
+    jersey: event.jersey ?? null,
+    side: toSide(event.side),
+    review: toReviewStatus(event.review),
   }
+}
+
+function toSide(side: string | null | undefined): ReviewSide | null {
+  return side === 'home' || side === 'away' ? side : null
+}
+
+function toReviewStatus(status: string | null | undefined): ReviewStatus | null {
+  return status === 'edited' || status === 'added' ? status : null
 }
 
 function toScore(score: readonly number[] | null | undefined): readonly [number, number] | null {
@@ -166,6 +192,8 @@ export function toBallAction(action: ApiBallAction): BallAction {
     probabilities: action.probabilities,
     isBackground: action.is_background,
     spotScore: action.spot_score,
+    side: toSide(action.side),
+    review: toReviewStatus(action.review),
   }
 }
 
@@ -179,7 +207,55 @@ export function toMatchAnalysis(analysis: ApiPartAnalysis): MatchAnalysis {
     ballActions: [...analysis.ball_actions].sort((a, b) => a.frame_idx - b.frame_idx).map(toBallAction),
     frameCount: analysis.frame_count,
     sourceVideoPath: analysis.source_video_path,
+    review: analysis.review ? toReviewInfo(analysis.review) : null,
   }
+}
+
+export function toReviewInfo(info: ApiReviewInfo): ReviewInfo {
+  const trackerSides = new Map<number, ReviewSide>()
+  for (const [id, raw] of Object.entries(info.tracker_sides)) {
+    const side = toSide(raw)
+    if (side) trackerSides.set(Number(id), side)
+  }
+  return {
+    exists: info.exists,
+    createdAt: info.created_at,
+    updatedAt: info.updated_at,
+    nEdited: info.n_edited,
+    nAdded: info.n_added,
+    nDeleted: info.n_deleted,
+    stale: info.stale ?? false,
+    trackerSides,
+  }
+}
+
+export function toReviewResult(result: ApiReviewItemResult): ReviewResult {
+  return {
+    kind: result.kind,
+    id: result.id,
+    deleted: result.deleted,
+    action: result.action ? toBallAction(result.action) : null,
+    event: result.event ? toMatchEvent(result.event) : null,
+    info: toReviewInfo(result.review),
+  }
+}
+
+export function toReviewSheet(sheet: ApiReviewExport): ReviewSheet {
+  return { fromS: sheet.from_s, toS: sheet.to_s, nRows: sheet.n_rows, filename: sheet.filename, path: sheet.path, csv: sheet.csv }
+}
+
+/** Only the fields present in `patch` go on the wire: an absent one is left alone by the backend. */
+export function toApiReviewPatch(patch: ReviewPatch): ApiReviewItemPatch {
+  const body: ApiReviewItemPatch = {}
+  if (patch.label !== undefined) body.label = patch.label
+  if (patch.timeS !== undefined) body.time_s = patch.timeS
+  if (patch.trackerId !== undefined) body.tracker_id = patch.trackerId
+  if (patch.side !== undefined) body.side = patch.side
+  return body
+}
+
+export function toApiReviewCreate(input: ReviewAddInput): ApiReviewItemCreate {
+  return { kind: input.kind, label: input.label, time_s: input.timeS, tracker_id: input.trackerId, side: input.side }
 }
 
 function toPersonDetection(person: ApiPersonDetection): PersonDetection {

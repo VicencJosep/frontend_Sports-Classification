@@ -159,7 +159,7 @@ export function TrimStrip({ clock, video, startS, endS, anchorS, view, events, c
       onPointerCancel={endDrag}
       onPointerLeave={() => setHover(null)}
     >
-      <Filmstrip src={video.url} fromS={view.fromS} toS={view.toS} width={width} height={FILM_HEIGHT} />
+      <Filmstrip src={video.url} thumbnailUrl={video.thumbnailUrl} fromS={view.fromS} toS={view.toS} width={width} height={FILM_HEIGHT} />
 
       {width > 0 && (
         <>
